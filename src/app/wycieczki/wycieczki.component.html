@@ -1,13 +1,20 @@
-<div class="row p-4 m-4">
+<div class="row p-4 m-2">
   <div class="col-xs-12" *ngFor="let product of products">
-    <div class="card m-4" style="width: 18rem;">
+    <div class="card m-4" style="width: 18rem;" [ngClass]="getBorderClass(product)">
       <div class="card-header bg-light text-center">
         <h3 class="card-title">{{product.kraj | uppercase}}</h3>
         <h5 class="card-title">{{product.nazwa | uppercase}} </h5>
 
       </div>
-      <div class="d-flex justify-content-center align-items-center p-2">
-        <img [src]="product.zdjecie" class="card-img-top round border">
+      <div class="row p-2">
+        <div class="col-lg-6 border-right text-center">
+          <img [src]="product.zdjecie" class="card-img-top round border">
+        </div>
+        <div class="col-md-6 d-flex flex-row justify-content-start">
+          <div class="d-flex align-items-center">
+            <h2>{{product.cena}}{{product.waluta | currency}}</h2>
+          </div>
+        </div>
       </div>
       <div class="card-body">
         <div class="d-flex flex-row justify-content-sm-between">
@@ -16,12 +23,13 @@
         <p class="card-text">{{product.opis}}</p>
         <div class="d-flex flex-row justify-content-sm-between">
           <div class="row ml-1">
-            <button [ngStyle]="{'display': product.iloscMiejsc > 0 ? 'block' : 'none' }" class="btn btn-dark">+</button>
+            <button [ngStyle]="{'display': product.iloscMiejsc > 0 ? 'block' : 'none' }" class="btn btn-dark"
+              (click)="book(product)">+</button>
             <button [ngStyle]="{'display': (product.iloscMiejsc < product.maxMiejsc) ? 'block' : 'none' }" class=" btn
-              btn-dark">-</button>
+              btn-dark" (click)="unbook(product)">-</button>
           </div>
           <h4 *ngIf="product.iloscMiejsc > 3" class="text-success">{{product.iloscMiejsc}}</h4>
-          <h4 *ngIf="product.iloscMiejsc < 3 && product.iloscMiejsc > 0" class="text-warning">{{product.iloscMiejsc}}
+          <h4 *ngIf="product.iloscMiejsc <= 3 && product.iloscMiejsc > 0" class="text-warning">{{product.iloscMiejsc}}
           </h4>
           <h4 *ngIf="product.iloscMiejsc == 0" class="text-danger">{{product.iloscMiejsc}}</h4>
         </div>
