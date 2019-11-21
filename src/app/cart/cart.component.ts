@@ -21,4 +21,8 @@ export class CartComponent implements OnInit {
     )
   }
 
+  delete(product: Trip){
+    this.cartService.deleteProduct(product)
+  }
+
 }
