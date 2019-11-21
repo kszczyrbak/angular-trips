@@ -1,0 +1,18 @@
+.cheapest {
+  border: 1px solid green;
+}
+
+.expensive {
+  border: 1px solid red;
+}
+
+
+
+.default {
+  border: 1px solid black;
+}
+
+.container-fluid {
+  width: 60%;
+  height: 100%;
+}

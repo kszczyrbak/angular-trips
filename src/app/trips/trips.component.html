@@ -1,0 +1,8 @@
+<div class="container-fluid mt-4 p-4">
+  <button class="btn btn-dark" (click)="openDialog()">Add a trip</button>
+  <div class="row p-4 m-2">
+    <app-trip class="m-4" [tripData]="product" [ngClass]="getBorderClass(product)" *ngFor="let product of products"
+      (removeEvent)="removeProduct(product)">
+    </app-trip>
+  </div>
+</div>

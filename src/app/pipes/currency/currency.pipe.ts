@@ -1,20 +1,20 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Waluta } from './wycieczki/wycieczka.model';
+import { Currency } from '../../models/trip.model';
 
 @Pipe({
   name: 'currency'
 })
 export class CurrencyPipe implements PipeTransform {
 
-  transform(currency: Waluta): string {
+  transform(currency: Currency): string {
     switch (currency) {
-      case Waluta.USD: {
+      case Currency.USD: {
         return '$'
       }
-      case Waluta.EUR: {
+      case Currency.EUR: {
         return '€'
       }
-      case Waluta.PLN: {
+      case Currency.PLN: {
         return 'zł'
       }
     }

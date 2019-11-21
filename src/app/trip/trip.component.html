@@ -1,0 +1,47 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-header bg-light text-center">
+    <h3 class="card-title">{{tripData.country | uppercase}}</h3>
+    <h5 class="card-title">{{tripData.name | uppercase}} </h5>
+
+  </div>
+  <div class="row p-2">
+    <div class="col-md-6 text-center">
+      <img [src]="tripData.photo" class="card-img-top round border">
+    </div>
+    <div class="col-md-6 d-flex flex-row justify-content-center">
+      <div class="d-flex align-items-center">
+        <h2>{{tripData.cost}}{{tripData.currency | currency}}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="d-flex flex-row justify-content-sm-between">
+      <h5>{{tripData.startDate | date:'yyyy/MM/dd'}} - {{tripData.endDate | date:'yyyy/MM/dd'}}</h5>
+    </div>
+    <div class="card-text">{{tripData.description}}</div>
+    <div class="mt-2 mb-2 d-flex flex-row align-items-center justify-content-sm-between">
+      <h5>Rating: </h5>
+      <star-rating [value]="tripData.rating" checkedcolor="orange" uncheckedcolor="black" size="22px" readonly="false"
+        (rate)="onRate($event)"></star-rating>
+    </div>
+    <div class="d-flex flex-row justify-content-sm-between">
+      <div class="row ml-1">
+        <button [ngStyle]="{'visibility': tripData.seatsLeft > 0 ? 'visible' : 'hidden' }" class="btn btn-dark"
+          (click)="book()">+</button>
+        <button [ngStyle]="{'visibility': (tripData.seatsLeft < tripData.maxSeats) ? 'visible' : 'hidden' }" class=" btn
+            btn-dark" (click)="unbook()">-</button>
+      </div>
+      <div>
+        <h4 *ngIf="tripData.seatsLeft > 3" class="text-success">{{tripData.seatsLeft}}</h4>
+        <h4 *ngIf="tripData.seatsLeft <= 3 && tripData.seatsLeft > 0" class="text-warning">{{tripData.seatsLeft}}
+        </h4>
+        <h4 *ngIf="tripData.seatsLeft == 0" class="text-danger">{{tripData.seatsLeft}}</h4>
+      </div>
+    </div>
+    <div class="mt-2 d-flex flex-row justify-content-center">
+      <button class="btn btn-dark onHover" (click)="removeProduct()">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
