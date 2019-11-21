@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Trip } from '../models/trip.model';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
 
 
 @Component({
@@ -14,20 +15,28 @@ export class AddTripComponent implements OnInit {
 
   addTripForm: FormGroup;
 
-  constructor() { }
+  constructor(private dialogRef: MatDialogRef<AddTripComponent>) { }
 
   ngOnInit() {
     this.addTripForm = new FormGroup({
-      name: new FormControl(),
-      country: new FormControl(),
+      name: new FormControl("", [Validators.minLength(4), Validators.required]),
+      country: new FormControl("", Validators.required),
       startDate: new FormControl(),
       endDate: new FormControl(),
-      cost: new FormControl(),
-      maxSeats: new FormControl(),
+      cost: new FormControl("", [Validators.required, Validators.min(0)]),
+      maxSeats: new FormControl("", [Validators.required, Validators.min(0)]),
       currency: new FormControl(),
-      description: new FormControl(),
-      photo: new FormControl(),
+      description: new FormControl()
     })
   }
+
+  submit() {
+    this.dialogRef.close(this.addTripForm.value);
+  }
+  
+  close() {
+    this.dialogRef.close();
+  }
+
 
 }
