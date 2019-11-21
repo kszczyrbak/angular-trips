@@ -10,6 +10,10 @@ import { TripComponent } from './trip/trip.component';
 import { AddTripComponent } from './add-trip/add-trip.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material';
+import { NavbarComponent } from './navbar/navbar.component';
+import { CartComponent } from './cart/cart.component';
+import { AppRoutingModule } from './app-routing.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -17,14 +21,18 @@ import { MatDialogModule } from '@angular/material';
     TripsComponent,
     CurrencyPipe,
     TripComponent,
-    AddTripComponent
+    AddTripComponent,
+    NavbarComponent,
+    CartComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     RatingModule,
     ReactiveFormsModule,
     NoopAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

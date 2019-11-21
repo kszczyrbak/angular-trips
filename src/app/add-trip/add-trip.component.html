@@ -1,11 +1,11 @@
-<h3>Add a new trip:</h3>
-<hr />
+<h3 class="text-center">New trip</h3>
+<hr/>
 <form [formGroup]="addTripForm">
   <div class="row">
     <div class="col-sm">
       <div class="form-group">
         <label>Trip name</label>
-        <input #name type="text" class="form-control" formControlName="name" required />
+        <input #name type="text" class="form-control" formControlName="name" />
 
         <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
           <div class="small" *ngIf="name.errors['required']">
@@ -20,7 +20,7 @@
     <div class="col-sm">
       <div class="form-group">
         <label>Country</label>
-        <input #country type="text" class="form-control" formControlName="country" required />
+        <input #country type="text" class="form-control" formControlName="country" />
       </div>
     </div>
   </div>
@@ -29,13 +29,13 @@
     <div class="col-sm">
       <div class="form-group">
         <label>Start date</label>
-        <input #startDate type="date" class="form-control" formControlName="startDate" required />
+        <input #startDate type="date" class="form-control" formControlName="startDate" />
       </div>
     </div>
     <div class="col-sm">
       <div class="form-group">
         <label>End date</label>
-        <input #endDate type="date" class="form-control" formControlName="endDate" required />
+        <input #endDate type="date" class="form-control" formControlName="endDate" />
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@
     <div class="col-sm">
       <div class="form-group">
         <label>Price</label>
-        <input #price type="number" class="form-control" formControlName="cost" required />
+        <input #price type="number" class="form-control" formControlName="cost" />
         <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
           <div class="small" *ngIf="price.errors['required']">
             Price is required.
@@ -56,27 +56,35 @@
       </div>
     </div>
     <div class="col-sm">
-      <div class="form-group">
-        <label>Number of seats</label>
-        <input #seatsLeft type="number" class="form-control" formControlName="maxSeats" required />
-        <div *ngIf="seatsLeft.invalid && (seatsLeft.dirty || seatsLeft.touched)" class="alert alert-danger">
-          <div class="small" *ngIf="seatsLeft.errors['required']">
-            Number of seats is required.
-          </div>
-          <div class="small" *ngIf="seatsLeft.errors['badFormat']">
-            Number of seats in bad format.
-          </div>
-        </div>
+      <div class="form-grup">
+        <label>Currency</label>
+        <select #currency class="form-control">
+          <option *ngFor="let curr of currencies" [value]="curr" [label]="currency[curr]"></option>
+        </select>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Number of seats</label>
+    <input #maxSeats type="number" class="form-control" formControlName="maxSeats" />
+    <div *ngIf="maxSeats.invalid && (maxSeats.dirty || maxSeats.touched)" class="alert alert-danger">
+      <div class="small" *ngIf="maxSeats.errors['required']">
+        Number of seats is required.
+      </div>
+      <div class="small" *ngIf="maxSeats.errors['badFormat']">
+        Number of seats in bad format.
       </div>
     </div>
   </div>
 
   <div class="form-group">
     <label>Description</label>
-    <textarea #description type="text" class="form-control" rows="5" formControlName="description" required></textarea>
+    <textarea #description type="text" class="form-control" rows="5" formControlName="description"></textarea>
   </div>
 
-  <pre>{{ addTripForm.value | json }}</pre>
+  <!-- <pre>{{ addTripForm.value | json }}</pre> -->
   <div class="d-flex flex-row justify-content-sm-between">
     <button type="submit" class="btn btn-dark" [disabled]="!addTripForm.valid" (click)="submit()">
       Submit

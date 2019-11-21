@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Trip } from '../models/trip.model';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-trip',
@@ -11,7 +12,7 @@ export class TripComponent implements OnInit {
   @Input() tripData: Trip
   @Output() removeEvent = new EventEmitter<Trip>()
 
-  constructor() { }
+  constructor(private cartService: CartService) { }
 
   ngOnInit() {
   }
@@ -22,7 +23,10 @@ export class TripComponent implements OnInit {
 
 
   book() {
-    if (this.tripData.seatsLeft > 0) this.tripData.seatsLeft -= 1
+    if (this.tripData.seatsLeft > 0) {
+      this.cartService.addProduct(this.tripData)
+      this.tripData.seatsLeft -= 1
+    }
   }
 
   unbook() {
