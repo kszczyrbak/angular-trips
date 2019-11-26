@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Currency } from '../../models/trip.model';
 
 @Pipe({
-  name: 'currency'
+  name: 'currency',
 })
 export class CurrencyPipe implements PipeTransform {
 

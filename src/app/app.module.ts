@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RatingModule } from 'ng-starrating';
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CartComponent } from './cart/cart.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientInMemoryWebApiModule, InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { TripService } from './services/trip.service';
+import { InMemoryTripService } from './services/inmemorytrip.service';
+import { HttpClientModule } from '@angular/common/http';
+import { TripDetailsComponent } from './trip-details/trip-details.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +29,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TripComponent,
     AddTripComponent,
     NavbarComponent,
-    CartComponent
+    CartComponent,
+    TripDetailsComponent
   ],
   imports: [
     AppRoutingModule,
@@ -32,7 +39,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     NoopAnimationsModule,
     MatDialogModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryTripService),
   ],
   providers: [],
   bootstrap: [AppComponent],

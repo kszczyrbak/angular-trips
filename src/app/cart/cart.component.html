@@ -1,6 +1,7 @@
 <div class="container-fluid pt-4 mt-4">
   <div class="pt-4 mt-4">
-    <div *ngFor="let product of products" class="border mb-4 d-flex flex-row align-items-center justify-content-sm-between">
+    <div *ngFor="let product of products"
+      class="border mb-4 d-flex flex-row align-items-center justify-content-sm-between">
       <div class="col-2 p-4 text-center">
         <img class="img-responsive" [src]="product.photo" width="120" height="80" />
       </div>
@@ -13,15 +14,17 @@
         </h2>
       </div>
       <div class="d-flex flex-column p-4">
-        <div class=" form-group">
-          <input class="form-control" disabled="true" type="number" step="1" max="99" min="1" [value]="0" title="Qty"
-            class="qty" size="4" />
-        </div>
         <div class="">
           <h3>
-            <strong>{{ product.cost }} {{product.currency | currency}} </strong>
+            <strong>{{product.cartCount}} x {{ product.cost }} {{product.currency | currency}} =
+              {{ product.cost * product.cartCount }} {{product.currency | currency}}</strong>
           </h3>
         </div>
+      </div>
+      <div class="ml-2 mr-2 d-flex flex-column">
+        <button class="btn btn-dark" (click)="inc(product)">+</button>
+        <button [ngStyle]="{'visibility': product.cartCount > 0 ? 'visible' : 'hidden' }" class=" btn
+              btn-dark" (click)="dec(product)">-</button>
       </div>
       <div class="p-4">
         <button type="button" (click)="delete(product)" class="btn btn-dark">
@@ -29,9 +32,9 @@
         </button>
       </div>
     </div>
-    <div class="p-4 mt-4 card-footer">
-      <div class="d-flex flex-row justify-content-sm-between">
-        <h3>Total price: <b>50.00€</b></h3>
+    <div class="card-footer">
+      <div class="d-flex flex-row justify-content-sm-between align-items-start">
+        <h4>Total price: {{ totalPrice() }} {{ chosenCurrency | currency }}</h4>
         <button routerLink="" routerLinkActive="active" class="btn btn-dark">Checkout</button>
       </div>
     </div>

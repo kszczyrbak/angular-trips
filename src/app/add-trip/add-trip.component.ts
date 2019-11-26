@@ -13,43 +13,12 @@ export class AddTripComponent implements OnInit {
 
   @Output() addTrip: EventEmitter<Trip> = new EventEmitter();
 
-  currency: Currency
+  currency = Currency;
   currencies: string[]
 
   addTripForm: FormGroup;
 
   constructor(private dialogRef: MatDialogRef<AddTripComponent>) { }
-
-  // validateStartDate(startDate: FormControl) {
-
-  //   return startDate.value > this.addTripForm.controls['endDate'].value ? null : {
-  //     validateStartDate: {
-  //       valid: false
-  //     }
-  //   };
-  // }
-
-  // validateEndDate(endDate: FormControl) {
-
-  //   return endDate.value < this.addTripForm.controls['startDate'].value ? null : {
-  //     validateEndDate: {
-  //       valid: false
-  //     }
-  //   };
-  // }
-
-  validateBeforeDate(date: FormControl) {
-
-    return date.value > Date() ? {
-      validateBeforeDate: {
-        valid: true
-      }
-    } : {
-        validateBeforeDate: {
-          valid: false
-        }
-      };
-  }
 
   ngOnInit() {
     this.addTripForm = new FormGroup({
@@ -59,12 +28,13 @@ export class AddTripComponent implements OnInit {
       endDate: new FormControl("", [Validators.required]),
       cost: new FormControl("", [Validators.required, Validators.min(0)]),
       maxSeats: new FormControl("", [Validators.required, Validators.min(0)]),
-      currency: new FormControl("", Validators.required),
+      currency: new FormControl(),
       description: new FormControl()
     })
     this.addTripForm.controls['startDate'].setValue(new Date())
 
     this.currencies = Object.keys(this.currency).filter(k => !isNaN(Number(k)))
+
   }
 
   submit() {

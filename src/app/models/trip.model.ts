@@ -6,6 +6,7 @@ export enum Currency {
 
 
 export interface Trip {
+  id: number;
   name: string;
   country: string;
   startDate: string;
@@ -17,5 +18,6 @@ export interface Trip {
   description?: string;
   photo?: string;
   rating?: number;
+  cartCount?: number;
 }
 

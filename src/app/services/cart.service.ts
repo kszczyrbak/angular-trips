@@ -6,28 +6,33 @@ import { Trip, Currency } from '../models/trip.model';
 })
 export class CartService {
 
-  private products: Trip[] = [
+  private cartProducts: Trip[] = [
   ]
 
   constructor() { }
 
-  getProducts(): Trip[] {
-    return this.products;
+  getCartProducts(): Trip[] {
+    return this.cartProducts;
   }
 
   getProduct(id: number): Trip {
-    return this.products[id];
+    return this.cartProducts[id];
   }
 
   addProduct(product: Trip) {
-    console.log(product)
-    this.products.push(product);
+    let index = this.cartProducts.indexOf(product);
+    if (index > -1)
+      this.cartProducts[index].cartCount += 1;
+    else {
+      product.cartCount = 1;
+      this.cartProducts.push(product);
+    }
   }
 
   deleteProduct(product: Trip) {
-    let index = this.products.indexOf(product)
+    let index = this.cartProducts.indexOf(product)
     if (index > -1) {
-      this.products.splice(index, 1)
+      this.cartProducts.splice(index, 1)
     }
   }
 }

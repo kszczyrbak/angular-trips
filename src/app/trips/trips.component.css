@@ -1,12 +1,10 @@
 .cheapest {
-  border: 1px solid green;
+  border: 1px solid greenyellow;
 }
 
 .expensive {
   border: 1px solid red;
 }
-
-
 
 .default {
   border: 1px solid black;

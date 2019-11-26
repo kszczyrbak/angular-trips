@@ -1,5 +1,5 @@
 <h3 class="text-center">New trip</h3>
-<hr/>
+<hr />
 <form [formGroup]="addTripForm">
   <div class="row">
     <div class="col-sm">
@@ -56,9 +56,9 @@
       </div>
     </div>
     <div class="col-sm">
-      <div class="form-grup">
+      <div class="form-group">
         <label>Currency</label>
-        <select #currency class="form-control">
+        <select #curr class="form-control">
           <option *ngFor="let curr of currencies" [value]="curr" [label]="currency[curr]"></option>
         </select>
 
