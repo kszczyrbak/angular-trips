@@ -4,6 +4,7 @@ import { TripService } from '../services/trip.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { AddTripComponent } from '../add-trip/add-trip.component';
 import { CurrencyService } from '../services/currency.service';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-trips',
@@ -11,6 +12,8 @@ import { CurrencyService } from '../services/currency.service';
   styleUrls: ['./trips.component.css']
 })
 export class TripsComponent implements OnInit {
+
+  faFilter = faFilter;
 
   products: Trip[] = [
   ]
