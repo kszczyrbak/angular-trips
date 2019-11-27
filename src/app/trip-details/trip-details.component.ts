@@ -25,4 +25,12 @@ export class TripDetailsComponent implements OnInit {
 
   }
 
+  book() {
+    this.trip.seatsLeft -= 1;
+  }
+
+  unbook() {
+    this.trip.seatsLeft += 1;
+  }
+
 }

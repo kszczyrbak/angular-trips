@@ -27,3 +27,9 @@
   opacity: 1;
   transition: all 0.65s;
 }
+
+.clickable:hover {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.5s;
+}
