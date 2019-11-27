@@ -20,9 +20,10 @@ export class CartService {
   }
 
   addProduct(product: Trip) {
-    let index = this.cartProducts.indexOf(product);
-    if (index > -1)
-      this.cartProducts[index].cartCount += 1;
+    let cartProduct = this.cartProducts.find(prod => prod.id == product.id)
+    console.log(cartProduct)
+    if (cartProduct)
+      cartProduct.cartCount += 1;
     else {
       product.cartCount = 1;
       this.cartProducts.push(product);

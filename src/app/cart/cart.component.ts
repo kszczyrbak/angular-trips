@@ -24,6 +24,7 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.products = this.cartService.getCartProducts()
     this.currencies = Object.keys(this.currency).filter(k => !isNaN(Number(k)))
+    console.log(this.products)
   }
 
   delete(product: Trip) {
