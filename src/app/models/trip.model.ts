@@ -11,7 +11,7 @@ export interface Trip {
   country: string;
   startDate: string;
   endDate: string;
-  cost: number;
+  price: number;
   seatsLeft: number;
   maxSeats: number;
   currency: Currency;

@@ -20,6 +20,7 @@ import { InMemoryTripService } from './services/inmemorytrip.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TripDetailsComponent } from './trip-details/trip-details.component';
 import { FilterComponent } from './filter/filter.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { FilterComponent } from './filter/filter.component';
     CartComponent,
     TripDetailsComponent,
     FilterComponent,
+    FilterPipe,
 
   ],
   imports: [

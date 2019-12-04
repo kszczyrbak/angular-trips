@@ -1,7 +1,7 @@
-<mat-drawer-container class="drawer-container mt-4">
+<mat-drawer-container class="drawer-container">
 
-  <mat-drawer #drawer class="side-bar col-md-2 no-padding" mode="side">
-    <app-filter></app-filter>
+  <mat-drawer #drawer class="side-bar col-md-2 no-padding mt-4" mode="side">
+    <app-filter (filterChange)="onFilterChange($event)"></app-filter>
   </mat-drawer>
 
   <div class="row">
@@ -17,8 +17,8 @@
         <button class="btn btn-dark" (click)="openDialog()">Add a trip</button>
       </div>
       <div class="card-deck justify-content-sm-around">
-        <app-trip class="m-4" [tripData]="product" [ngClass]="getBorderClass(product)" *ngFor="let product of products"
-          (removeEvent)="removeProduct(product)">
+        <app-trip class="m-4" [tripData]="product" [ngClass]="getBorderClass(product)"
+          *ngFor="let product of products | filter:filterObj " (removeEvent)="removeProduct(product)">
         </app-trip>
       </div>
     </div>

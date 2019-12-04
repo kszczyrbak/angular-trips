@@ -15,6 +15,8 @@ export class TripsComponent implements OnInit {
 
   faFilter = faFilter;
 
+  filterObj: any = {};
+
   products: Trip[] = [
   ]
 
@@ -22,28 +24,37 @@ export class TripsComponent implements OnInit {
   }
 
   getBorderClass(product: Trip) {
-    let cost = product.cost;
+    let price = product.price;
 
     let max = this.products.length
-    if (cost == this.products[0].cost) {
+    if (price == this.products[0].price) {
       return 'cheapest'
     }
-    if (cost == this.products[max - 1].cost) {
+    if (price == this.products[max - 1].price) {
       return 'expensive'
     }
     else
       return 'default'
   }
 
+  onFilterChange(filters: any) {
+    this.filterObj = filters;
+  }
+
+  sortTrips(products: Trip[]) {
+    console.log(products)
+    return products.sort((a, b) => this.currencyService.convert(a.price, a.currency) - this.currencyService.convert(b.price, b.currency))
+  }
+
   getTrips() {
     this.tripService.getProducts().subscribe(
-      products => this.products = products.sort((a, b) => this.currencyService.convert(a.cost, a.currency) - this.currencyService.convert(b.cost, b.currency)),
+      products => this.products = this.sortTrips(products),
       error => console.log(error)
     )
   }
 
   ngOnInit() {
-    this.getTrips()
+    this.getTrips();
   }
 
   removeProduct(product: Trip) {
@@ -53,10 +64,6 @@ export class TripsComponent implements OnInit {
       }
     )
   }
-
-  // sortTrips() {
-  //   this.products = this.products.sort((a, b) => this.currencyService.convert(a.cost, a.currency) - this.currencyService.convert(b.cost, b.currency))
-  // }
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();

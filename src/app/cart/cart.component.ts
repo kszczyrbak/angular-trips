@@ -33,7 +33,7 @@ export class CartComponent implements OnInit {
 
   totalPrice() {
     if (this.products.length > 0)
-      return this.products.map(product => this.currencyService.convert(product.cost * product.cartCount, product.currency)).reduce((acc, val) => acc + val);
+      return this.products.map(product => this.currencyService.convert(product.price * product.cartCount, product.currency)).reduce((acc, val) => acc + val);
     else return 0;
   }
 
