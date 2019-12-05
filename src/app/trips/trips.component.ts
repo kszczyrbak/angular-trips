@@ -5,6 +5,8 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { AddTripComponent } from '../add-trip/add-trip.component';
 import { CurrencyService } from '../services/currency.service';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { FiredbService } from '../services/firedb.service';
+import { photoPlaceholder } from 'src/assets/fake-dane';
 
 @Component({
   selector: 'app-trips',
@@ -20,7 +22,7 @@ export class TripsComponent implements OnInit {
   products: Trip[] = [
   ]
 
-  constructor(private tripService: TripService, private dialog: MatDialog, private currencyService: CurrencyService) {
+  constructor(private tripService: TripService, private dialog: MatDialog, private currencyService: CurrencyService, private firedb: FiredbService) {
   }
 
   getBorderClass(product: Trip) {
@@ -42,7 +44,6 @@ export class TripsComponent implements OnInit {
   }
 
   sortTrips(products: Trip[]) {
-    console.log(products)
     return products.sort((a, b) => this.currencyService.convert(a.price, a.currency) - this.currencyService.convert(b.price, b.currency))
   }
 
@@ -54,7 +55,12 @@ export class TripsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getTrips();
+    // this.getTrips();
+
+    this.firedb.fetchTrips().subscribe(
+      trips => this.products = this.sortTrips(trips),
+      error => console.log(error)
+    )
   }
 
   removeProduct(product: Trip) {
@@ -63,6 +69,10 @@ export class TripsComponent implements OnInit {
         this.getTrips()
       }
     )
+  }
+
+  getMaxId() {
+    return this.products.map(trip => trip.id).sort((a, b) => (a > b) ? -1 : 1)[0] + 1
   }
 
   openDialog() {
@@ -75,10 +85,10 @@ export class TripsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(data => {
       if (data != undefined) {
-        this.tripService.addProduct(data).subscribe(
-          (addedProduct: Trip) => {
-            this.getTrips()
-          }
+        data.id = this.getMaxId();
+        data.photo = photoPlaceholder;
+        this.firedb.addTrip(data).then(() =>
+          console.log('Added trip', data)
         )
       }
     });

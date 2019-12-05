@@ -1,26 +1,28 @@
-<mat-drawer-container class="drawer-container">
+<div class="container-fluid">
+  <mat-drawer-container class="drawer-container">
 
-  <mat-drawer #drawer class="side-bar col-md-2 no-padding mt-4" mode="side">
-    <app-filter (filterChange)="onFilterChange($event)"></app-filter>
-  </mat-drawer>
+    <mat-drawer #drawer class="side-bar col-md-2 no-padding mt-4" mode="side">
+      <app-filter (filterChange)="onFilterChange($event)"></app-filter>
+    </mat-drawer>
 
-  <div class="row">
-    <div class="col-md-2">
-      <div class="m-4">
-        <button type="button" class="btn btn-dark" (click)="drawer.toggle()">
-          Filter <fa-icon [icon]="faFilter"></fa-icon>
-        </button>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="m-4">
+          <button type="button" class="btn btn-dark" (click)="drawer.toggle()">
+            Filter <fa-icon [icon]="faFilter"></fa-icon>
+          </button>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="d-flex flex-row justify-content-center mt-4">
+          <button class="btn btn-dark" (click)="openDialog()">Add a trip</button>
+        </div>
+        <div class="card-deck justify-content-sm-around">
+          <app-trip class="m-4" [tripData]="product" [ngClass]="getBorderClass(product)"
+            *ngFor="let product of products | filter:filterObj " (removeEvent)="removeProduct(product)">
+          </app-trip>
+        </div>
       </div>
     </div>
-    <div class="col-lg-8">
-      <div class="d-flex flex-row justify-content-center mt-4">
-        <button class="btn btn-dark" (click)="openDialog()">Add a trip</button>
-      </div>
-      <div class="card-deck justify-content-sm-around">
-        <app-trip class="m-4" [tripData]="product" [ngClass]="getBorderClass(product)"
-          *ngFor="let product of products | filter:filterObj " (removeEvent)="removeProduct(product)">
-        </app-trip>
-      </div>
-    </div>
-  </div>
-</mat-drawer-container>
+  </mat-drawer-container>
+</div>

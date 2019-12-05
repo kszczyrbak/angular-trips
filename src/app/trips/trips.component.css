@@ -11,7 +11,6 @@
 }
 
 .container-fluid {
-  width: 60%;
   height: 100%;
 }
 
@@ -20,5 +19,9 @@
 }
 
 .row {
+  height: 100%;
+}
+
+.drawer-container {
   height: 100%;
 }

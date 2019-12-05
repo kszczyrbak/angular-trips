@@ -17,7 +17,6 @@ export class FilterPipe implements PipeTransform {
 
   filterPrice(product: Trip, filters: any) {
     let val = (filters['priceMin'] ? (product.price > filters['priceMin']) : true) && (filters['priceMax'] ? (product.price < filters['priceMax']) : true);
-    console.log(val)
     return val;
   }
 
