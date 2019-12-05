@@ -64,11 +64,12 @@ export class TripsComponent implements OnInit {
   }
 
   removeProduct(product: Trip) {
-    this.tripService.deleteProduct(product).subscribe(
-      response => {
-        this.getTrips()
-      }
-    )
+    return this.firedb.deleteTripById(product.id)
+    // this.tripService.deleteProduct(product).subscribe(
+    //   response => {
+    //     this.getTrips()
+    //   }
+    // )
   }
 
   getMaxId() {
