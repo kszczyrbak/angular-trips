@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -31,12 +33,21 @@ export class RegisterComponent implements OnInit {
     return val === matchVal ? null : { notSame: true }
   }
 
+  get f() {
+    return this.registerForm.controls;
+  }
+
   onSubmit() {
     if (this.registerForm.invalid) {
       return;
     }
 
-    console.log(this.registerForm.value)
+    this.authService.register({ email: this.f.email.value, password: this.f.password.value }).then(
+      (user) => {
+        console.log(user);
+        this.router.navigateByUrl('/app')
+      }
+    )
   }
 
 }

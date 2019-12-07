@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose')
+var bodyParser = require('body-parser')
+
+app.use(bodyParser.json())
 
 mongoose.connect('mongodb://localhost:27017/test', {
   useNewUrlParser: true
@@ -16,6 +19,7 @@ const Trip = mongoose.model('Trip', {
   id: Number,
   name: String,
   country: String,
+  rating: Number,
   startDate: Date,
   endDate: Date,
   description: String,
@@ -28,19 +32,21 @@ const Trip = mongoose.model('Trip', {
 app.post('/trips', function (req, res) {
   var trip = new Trip(req.body);
 
-  console.log(trip)
   trip.save(function (err) {
     if (err) throw err;
-    console.log('trip saved')
+    res.json(trip)
   })
-
 })
 
 app.get('/trips', function (req, res) {
-  console.log('trips')
+  Trip.find({}).then(function (trips) {
+    res.json(trips);
+  })
 });
 
 app.get('/trips/:id', function (req, res) {
-  console.log('trips', +req.params.id)
+  Trip.find({'id': +req.params.id}).then(function (trip){
+    res.json(trip);
+  })
 });
 app.listen(5000);
