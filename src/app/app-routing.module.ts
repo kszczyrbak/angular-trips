@@ -5,12 +5,21 @@ import { TripsComponent } from './trips/trips.component';
 import { TripDetailsComponent } from './trip-details/trip-details.component';
 import { AuthGuard } from './services/auth-guard';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-    { path: '', component: TripsComponent, canActivate: [AuthGuard] },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
-    { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
-    { path: 'trip/:id', component: TripDetailsComponent, canActivate: [AuthGuard] },
+    { path: 'register', component: RegisterComponent },
+    {
+        path: 'app', component: HomeComponent, canActivate: [AuthGuard], children: [
+            { path: '', component: TripsComponent, },
+            { path: 'cart', component: CartComponent },
+            { path: 'trip/:id', component: TripDetailsComponent },
+        ]
+    }
+
 
 ];
 

@@ -11,12 +11,12 @@ export class FiredbService {
   trips;
 
   constructor(private db: AngularFireDatabase) {
-    this.trips = this.db.list('/trips/');
+    this.trips = this.db.list('/trips/trips/');
     console.dir(this.trips);
   }
 
   fetchTrips() {
-    return this.db.list('/trips/').valueChanges();
+    return this.db.list('/trips/trips/').valueChanges();
   }
 
   deleteTrips() {
@@ -24,11 +24,11 @@ export class FiredbService {
   }
 
   addTrip(product: Trip) {
-    return this.db.object(`/trips/${product.id}`).set(product)
+    return this.db.object(`/trips/trips/${product.id}`).set(product)
   }
 
   deleteTripById(tripId: number) {
-    this.db.object(`/trips/${tripId}`).remove();
+    this.db.object(`/trips/trips/${tripId}`).remove();
   }
 
 }

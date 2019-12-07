@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
   ) {
     if (this.authService.user) {
-      this.router.navigate(['']);
+      this.router.navigate(['/app']);
     }
   }
 
@@ -28,8 +28,6 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
-
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   onSubmit() {
@@ -40,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value)
       .then((user) => {
         console.log(user);
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('/app');
       })
       .catch((error) => {
         console.log(error);

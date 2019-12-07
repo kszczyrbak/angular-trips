@@ -58,18 +58,13 @@ export class TripsComponent implements OnInit {
     // this.getTrips();
 
     this.firedb.fetchTrips().subscribe(
-      trips => this.products = this.sortTrips(trips),
+      (trips: Trip[]) => this.products = this.sortTrips(trips),
       error => console.log(error)
     )
   }
 
   removeProduct(product: Trip) {
     return this.firedb.deleteTripById(product.id)
-    // this.tripService.deleteProduct(product).subscribe(
-    //   response => {
-    //     this.getTrips()
-    //   }
-    // )
   }
 
   getMaxId() {

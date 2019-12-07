@@ -26,6 +26,8 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from './login/login.component';
 import { FiredbService } from './services/firedb.service';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import { FiredbService } from './services/firedb.service';
     FilterComponent,
     FilterPipe,
     LoginComponent,
+    RegisterComponent,
+    HomeComponent,
   ],
   imports: [
     AppRoutingModule,
