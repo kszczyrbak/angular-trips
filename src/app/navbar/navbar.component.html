@@ -9,8 +9,11 @@
       <li class="nav-item active">
         <a class="nav-link" routerLink="cart" routerLinkActive="active">Cart</a>
       </li>
-      <li class="border-left nav-item active">
-        <a class="nav-link" routerLink="cart" routerLinkActive="active">Admin</a>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="" routerLinkActive="active">Admin</a>
+      </li>
+      <li class="border-left nav-item active ml-2 clickable">
+        <a class="nav-link" (click)="logout()" routerLinkActive="active">Logout</a>
       </li>
     </ul>
   </div>

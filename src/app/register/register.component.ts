@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
+import { User } from '../models/user.model';
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-register',
@@ -12,7 +15,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -44,7 +47,9 @@ export class RegisterComponent implements OnInit {
 
     this.authService.register({ email: this.f.email.value, password: this.f.password.value }).then(
       (user) => {
-        console.log(user);
+        let { password, confirmPassword, ...userData } = this.registerForm.value;
+        userData.role = "USER";
+        this.userService.addUser(userData).pipe(map((user: User) => console.log(user)));
         this.router.navigateByUrl('/app')
       }
     )

@@ -9,7 +9,7 @@ import { tap, catchError } from 'rxjs/operators'
 })
 export class TripService {
 
-  private apiUrl = 'api/trips'
+  private apiUrl = 'localhost:5000/trips/'
 
   constructor(private httpClient: HttpClient) { }
 

@@ -16,7 +16,6 @@ db.once('open', function () {
 })
 
 const Trip = mongoose.model('Trip', {
-  id: Number,
   name: String,
   country: String,
   rating: Number,
@@ -28,6 +27,16 @@ const Trip = mongoose.model('Trip', {
   maxSeats: Number,
   photo: String
 });
+
+const User = mongoose.model('User', {
+  firstName: String,
+  lastName: String,
+  email: String,
+  role: {
+    type: String,
+    enum: ['USER', 'ADMIN']
+  }
+})
 
 app.post('/trips', function (req, res) {
   var trip = new Trip(req.body);
@@ -45,8 +54,92 @@ app.get('/trips', function (req, res) {
 });
 
 app.get('/trips/:id', function (req, res) {
-  Trip.find({'id': +req.params.id}).then(function (trip){
+  Trip.find({
+    'id': req.params.id
+  }).then(function (trip) {
     res.json(trip);
   })
 });
+
+app.put('/trips/:id', function (req, res) {
+  var patchBody = req.body;
+
+  Trip.updateOne({
+    'id': req.params.id
+  }, patchBody).then(function (trip) {
+    res.json(trip);
+  })
+});
+
+app.delete('/trips/:id', function (req, res) {
+  Trip.deleteOne({
+    _id: req.params.id
+  }, function (err) {
+    if (err) throw err;
+  })
+
+  res.sendStatus(200);
+});
+
+app.delete('/trips/', function (req, res) {
+  Trip.deleteMany({}, function (err) {
+    if (err) throw err;
+  })
+
+  res.sendStatus(200);
+});
+
+app.post('/users', function (req, res) {
+  var user = new User(req.body);
+
+  user.save(function (err) {
+    if (err) throw err;
+    console.log(user._id)
+    res.json(user)
+  })
+})
+
+app.get('/users', function (req, res) {
+  User.find({}).then(function (users) {
+    res.json(users);
+  })
+});
+
+app.get('/users/:id', function (req, res) {
+  User.find({
+    'id': req.params.id
+  }).then(function (user) {
+    res.json(user);
+  })
+});
+
+app.put('/users/:id', function (req, res) {
+  var patchBody = req.body;
+
+  User.updateOne({
+    'id': req.params.id
+  }, patchBody).then(function (user) {
+    res.json(user);
+  })
+});
+
+app.delete('/users/:id', function (req, res) {
+  User.deleteOne({
+    _id: id
+  }, function (err) {
+    if (err) throw err;
+  })
+
+  res.sendStatus(200);
+});
+
+app.delete('/users/', function (req, res) {
+  User.deleteMany({}, function (err) {
+    if (err) throw err;
+  })
+
+  res.sendStatus(200);
+});
+
+
 app.listen(5000);
