@@ -2,12 +2,14 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose')
 var bodyParser = require('body-parser')
+var cors = require('cors')
 
 app.use(bodyParser.json())
+app.use(cors())
 
-mongoose.connect('mongodb://localhost:27017/test', {
-  useNewUrlParser: true
-});
+var connectionString = "mongodb+srv://thuleq:<password>@tripstest-2osto.mongodb.net/test?retryWrites=true&w=majority"
+
+mongoose.connect(connectionString, { useNewUrlParser: true, user: 'thuleq', pass: 'Ezkatka6'});
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'blad'));

@@ -11,23 +11,26 @@ export class UserService {
 
   currentUser: User;
 
-  // private apiUrl: string = `${environment.backendUrl}/users/`
+  private apiUrl: string = `http://${environment.backendUrl}/users`
 
   constructor(private httpClient: HttpClient) {
-
+    this.getUsers().subscribe(
+      users => console.log(users),
+      err => console.log(err)
+    )
   }
 
   getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>('localhost:5000/users/')
+    return this.httpClient.get<User[]>(this.apiUrl)
   }
 
   getUser(id: number): Observable<User> {
-    return this.httpClient.get<User>(`localhost:5000/users/${id}`)
+    return this.httpClient.get<User>(`${this.apiUrl}/${id}`)
   }
 
   addUser(user: User): Observable<User> {
     console.log(user);
-    return this.httpClient.post<User>('localhost:5000/users/', user)
+    return this.httpClient.post<User>(this.apiUrl, user)
   }
 
 

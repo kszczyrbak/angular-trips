@@ -28,6 +28,8 @@ import { LoginComponent } from './login/login.component';
 import { FiredbService } from './services/firedb.service';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { TripService } from './services/trip.service';
+import { UserService } from './services/user.service';
 
 
 @NgModule({
@@ -57,7 +59,7 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     MatSidenavModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryTripService),
+    // HttpClientInMemoryWebApiModule.forRoot(InMemoryTripService),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule

@@ -7,6 +7,7 @@ import { CurrencyService } from '../services/currency.service';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { FiredbService } from '../services/firedb.service';
 import { photoPlaceholder } from 'src/assets/fake-dane';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-trips',
@@ -22,7 +23,7 @@ export class TripsComponent implements OnInit {
   products: Trip[] = [
   ]
 
-  constructor(private tripService: TripService, private dialog: MatDialog, private currencyService: CurrencyService, private firedb: FiredbService) {
+  constructor(private tripService: TripService, private dialog: MatDialog, private currencyService: CurrencyService, private firedb: FiredbService, private userService: UserService) {
   }
 
   getBorderClass(product: Trip) {
