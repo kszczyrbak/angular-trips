@@ -9,7 +9,11 @@ app.use(cors())
 
 var connectionString = "mongodb+srv://thuleq:<password>@tripstest-2osto.mongodb.net/test?retryWrites=true&w=majority"
 
-mongoose.connect(connectionString, { useNewUrlParser: true, user: 'thuleq', pass: 'Ezkatka6'});
+mongoose.connect(connectionString, {
+  useNewUrlParser: true,
+  user: 'thuleq',
+  pass: 'Ezkatka6'
+});
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'blad'));
@@ -56,8 +60,8 @@ app.get('/trips', function (req, res) {
 });
 
 app.get('/trips/:id', function (req, res) {
-  Trip.find({
-    'id': req.params.id
+  Trip.findOne({
+    _id: req.params.id
   }).then(function (trip) {
     res.json(trip);
   })
@@ -67,7 +71,7 @@ app.put('/trips/:id', function (req, res) {
   var patchBody = req.body;
 
   Trip.updateOne({
-    'id': req.params.id
+    _id: req.params.id
   }, patchBody).then(function (trip) {
     res.json(trip);
   })
@@ -108,8 +112,8 @@ app.get('/users', function (req, res) {
 });
 
 app.get('/users/:id', function (req, res) {
-  User.find({
-    'id': req.params.id
+  User.findOne({
+    _id: req.params.id
   }).then(function (user) {
     res.json(user);
   })
@@ -119,7 +123,7 @@ app.put('/users/:id', function (req, res) {
   var patchBody = req.body;
 
   User.updateOne({
-    'id': req.params.id
+    _id: req.params.id
   }, patchBody).then(function (user) {
     res.json(user);
   })

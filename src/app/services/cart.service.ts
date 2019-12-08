@@ -20,7 +20,7 @@ export class CartService {
   }
 
   addProduct(product: Trip) {
-    let cartProduct = this.cartProducts.find(prod => prod.id == product.id)
+    let cartProduct = this.cartProducts.find(prod => prod._id == product._id)
     console.log(cartProduct)
     if (cartProduct)
       cartProduct.cartCount += 1;

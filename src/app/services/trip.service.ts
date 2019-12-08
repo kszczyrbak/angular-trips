@@ -9,7 +9,7 @@ import { tap, catchError } from 'rxjs/operators'
 })
 export class TripService {
 
-  private apiUrl = 'localhost:5000/trips/'
+  private apiUrl = 'http://localhost:5000/trips'
 
   constructor(private httpClient: HttpClient) { }
 
@@ -17,8 +17,8 @@ export class TripService {
     return this.httpClient.get<Trip[]>(this.apiUrl);
   }
 
-  getProduct(id: number) {
-    return this.httpClient.get<Trip>(`${this.apiUrl}/${id}`);
+  getProduct(_id: number) {
+    return this.httpClient.get<Trip>(`${this.apiUrl}/${_id}`);
   }
 
   addProduct(product: Trip) {
@@ -29,7 +29,7 @@ export class TripService {
   }
 
   deleteProduct(product: Trip) {
-    let id = product.id;
-    return this.httpClient.delete<Trip>(`${this.apiUrl}/${id}`);
+    let _id = product._id;
+    return this.httpClient.delete<Trip>(`${this.apiUrl}/${_id}`);
   }
 }

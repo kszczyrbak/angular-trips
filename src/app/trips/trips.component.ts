@@ -56,20 +56,22 @@ export class TripsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getTrips();
+    this.getTrips();
 
-    this.firedb.fetchTrips().subscribe(
-      (trips: Trip[]) => this.products = this.sortTrips(trips),
-      error => console.log(error)
-    )
+    // this.firedb.fetchTrips().subscribe(
+    //   (trips: Trip[]) => this.products = this.sortTrips(trips),
+    //   error => console.log(error)
+    // )
   }
 
   removeProduct(product: Trip) {
-    return this.firedb.deleteTripById(product.id)
+    // return this.firedb.deleteTripById(product._id)
+
+    return this.tripService.deleteProduct(product)
   }
 
   getMaxId() {
-    return this.products.map(trip => trip.id).sort((a, b) => (a > b) ? -1 : 1)[0] + 1
+    return this.products.map(trip => trip._id).sort((a, b) => (a > b) ? -1 : 1)[0] + 1
   }
 
   openDialog() {
@@ -82,11 +84,12 @@ export class TripsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(data => {
       if (data != undefined) {
-        data.id = this.getMaxId();
+        // data._id = this.getMaxId();
         data.photo = photoPlaceholder;
-        this.firedb.addTrip(data).then(() =>
-          console.log('Added trip', data)
-        )
+        this.tripService.addProduct(data);
+        // this.firedb.addTrip(data).then(() =>
+        //   console.log('Added trip', data)
+        // )
       }
     });
   }

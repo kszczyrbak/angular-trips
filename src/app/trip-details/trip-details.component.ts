@@ -17,8 +17,11 @@ export class TripDetailsComponent implements OnInit {
 
   ngOnInit() {
     let id = this.route.params.subscribe(
-      params => this.tripService.getProduct(Number.parseInt(params["id"])).subscribe(
-        trip => this.trip = trip,
+      params => this.tripService.getProduct(params["id"]).subscribe(
+        trip => {
+          console.log(trip);
+          this.trip = trip;
+        },
         error => console.log(error)
       )
     )

@@ -24,10 +24,10 @@ export class FiredbService {
   }
 
   addTrip(product: Trip) {
-    return this.db.object(`/trips/trips/${product.id}`).set(product)
+    return this.db.object(`/trips/trips/${product._id}`).set(product)
   }
 
-  deleteTripById(tripId: number) {
+  deleteTripById(tripId: string) {
     this.db.object(`/trips/trips/${tripId}`).remove();
   }
 

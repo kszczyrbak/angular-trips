@@ -6,7 +6,7 @@ export enum Currency {
 
 
 export interface Trip {
-  id: number;
+  _id: string;
   name: string;
   country: string;
   startDate: string;

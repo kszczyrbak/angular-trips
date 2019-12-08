@@ -29,7 +29,6 @@ export class UserService {
   }
 
   addUser(user: User): Observable<User> {
-    console.log(user);
     return this.httpClient.post<User>(this.apiUrl, user)
   }
 
