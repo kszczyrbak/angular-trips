@@ -16,8 +16,7 @@
       <div class="d-flex flex-column p-4">
         <div class="">
           <h3>
-            <strong>{{product.cartCount}} x {{ product.cost }} {{product.currency | currency}} =
-              {{ product.cost * product.cartCount }} {{product.currency | currency}}</strong>
+            <strong>{{product.cartCount}} x {{ product.price }} zł = {{product.price * product.cartCount}} zł</strong>
           </h3>
         </div>
       </div>
@@ -34,7 +33,7 @@
     </div>
     <div class="card-footer">
       <div class="d-flex flex-row justify-content-sm-between align-items-start">
-        <h4>Total price: {{ totalPrice() }} {{ chosenCurrency | currency }}</h4>
+        <h4>Total price: {{ totalPrice() }} zł</h4>
         <button routerLink="" routerLinkActive="active" class="btn btn-dark">Checkout</button>
       </div>
     </div>

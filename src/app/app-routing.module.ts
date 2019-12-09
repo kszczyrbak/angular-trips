@@ -7,6 +7,8 @@ import { AuthGuard } from './services/auth-guard';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminGuard } from './services/admin-guard';
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,8 +19,9 @@ const routes: Routes = [
             { path: '', component: TripsComponent, },
             { path: 'cart', component: CartComponent },
             { path: 'trip/:id', component: TripDetailsComponent },
+            { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] }
         ]
-    }
+    },
 
 
 ];

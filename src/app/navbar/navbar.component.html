@@ -7,13 +7,16 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="cart" routerLinkActive="active">Cart</a>
+        <a class="btn btn-light" routerLink="cart" routerLinkActive="active">
+          <i class="fa fa-shopping-cart"></i>Cart
+          <span class="badge badge-dark">{{cartCount}}</span>
+        </a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="" routerLinkActive="active">Admin</a>
+      <li class="nav-item active ml-4" *ngIf="userRole == SecurityRole.ADMIN">
+        <a class="btn btn-success" routerLink="admin" routerLinkActive="active">Admin</a>
       </li>
-      <li class="border-left nav-item active ml-2 clickable">
-        <a class="nav-link" (click)="logout()" routerLinkActive="active">Logout</a>
+      <li class="nav-item active ml-4 clickable">
+        <a class="btn btn-danger" routerLinkActive="active" (click)="logout()" routerLinkActive="active">Logout</a>
       </li>
     </ul>
   </div>

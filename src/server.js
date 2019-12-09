@@ -28,7 +28,7 @@ const Trip = mongoose.model('Trip', {
   startDate: Date,
   endDate: Date,
   description: String,
-  rating: Number,
+  price: Number,
   seatsLeft: Number,
   maxSeats: Number,
   photo: String
@@ -84,7 +84,9 @@ app.delete('/trips/:id', function (req, res) {
     if (err) throw err;
   })
 
-  res.status(200).json({"message": "OK"});
+  res.status(200).json({
+    "message": "OK"
+  });
 });
 
 app.delete('/trips/', function (req, res) {
@@ -92,7 +94,9 @@ app.delete('/trips/', function (req, res) {
     if (err) throw err;
   })
 
-  res.status(200).json({"message": "OK"});
+  res.status(200).json({
+    "message": "OK"
+  });
 });
 
 app.post('/users', function (req, res) {
@@ -119,6 +123,14 @@ app.get('/users/:id', function (req, res) {
   })
 });
 
+app.get('/users/role/:email', function (req, res) {
+  User.findOne({
+    email: req.params.email
+  }).then(function (user) {
+    res.status(200).json(user.role);
+  })
+});
+
 app.put('/users/:id', function (req, res) {
   var patchBody = req.body;
 
@@ -136,7 +148,9 @@ app.delete('/users/:id', function (req, res) {
     if (err) throw err;
   })
 
-  res.status(200).json({"message": "OK"});
+  res.status(200).json({
+    "message": "OK"
+  });
 });
 
 app.delete('/users/', function (req, res) {
@@ -144,7 +158,9 @@ app.delete('/users/', function (req, res) {
     if (err) throw err;
   })
 
-  res.status(200).json({"message": "OK"});
+  res.status(200).json({
+    "message": "OK"
+  });
 });
 
 

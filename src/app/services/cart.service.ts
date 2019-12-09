@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Trip, Currency } from '../models/trip.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+
+  cartCount$: Subject<number> = new Subject<number>();
 
   private cartProducts: Trip[] = [
   ]
@@ -28,6 +31,7 @@ export class CartService {
       product.cartCount = 1;
       this.cartProducts.push(product);
     }
+    this.cartCount$.next(this.cartProducts.length)
   }
 
   deleteProduct(product: Trip) {
@@ -35,5 +39,6 @@ export class CartService {
     if (index > -1) {
       this.cartProducts.splice(index, 1)
     }
+    this.cartCount$.next(this.cartProducts.length)
   }
 }

@@ -14,7 +14,6 @@ export interface Trip {
   price: number;
   seatsLeft: number;
   maxSeats: number;
-  currency: Currency;
   description?: string;
   photo?: string;
   rating?: number;

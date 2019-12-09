@@ -17,21 +17,8 @@
               (rate)="onRate($event)"></star-rating>
           </div>
         </div>
-        <div class="seats d-flex flex-row justify-content-start pt-2">
+        <div class="seats d-flex flex-row justify-content-sm-between align-items-center pt-2">
           <h4>Seats left: {{trip.seatsLeft}}</h4>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="subtitle pt-2">
-          <h2>{{trip.country}}</h2>
-        </div>
-        <div class="pt-2">
-          <div class="cost">
-            <h2>{{trip.cost}} {{trip.currency | currency}}</h2>
-          </div>
-          <div class="description mt-4 mb-4">
-            {{trip.description}}
-          </div>
           <div class="buttons">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-dark" [disabled]="trip.seatsLeft <= 0" (click)="book()">
@@ -45,6 +32,28 @@
           </div>
         </div>
       </div>
+      <div class="col-md-4">
+        <div class="subtitle pt-2">
+          <h3>Country</h3>
+          <hr/>
+          <h5>{{trip.country}}</h5>
+        </div>
+        <div class="pt-2">
+          <div class="cost">
+            <h2>{{trip.cost}} {{trip.currency | currency}}</h2>
+          </div>
+          <div class="description mt-4 mb-4">
+            <h3>Description</h3>
+            <hr/>
+            {{trip.description}}
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="buttons">
+    <button type="button" class="btn btn-dark" routerLink="" routerLinkActive="active">
+      Go back
+    </button>
   </div>
 </div>

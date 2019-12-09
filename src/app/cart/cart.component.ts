@@ -14,16 +14,10 @@ export class CartComponent implements OnInit {
 
   products: Trip[] = []
 
-  currency = Currency
-  currencies: string[]
-
-  chosenCurrency = this.currency.PLN;
-
-  constructor(private cartService: CartService, private currencyService: CurrencyService) { }
+  constructor(private cartService: CartService) { }
 
   ngOnInit() {
     this.products = this.cartService.getCartProducts()
-    this.currencies = Object.keys(this.currency).filter(k => !isNaN(Number(k)))
     console.log(this.products)
   }
 
@@ -33,7 +27,7 @@ export class CartComponent implements OnInit {
 
   totalPrice() {
     if (this.products.length > 0)
-      return this.products.map(product => this.currencyService.convert(product.price * product.cartCount, product.currency)).reduce((acc, val) => acc + val);
+      return this.products.map(product => (product.price * product.cartCount)).reduce((acc, val) => acc + val);
     else return 0;
   }
 
@@ -46,8 +40,7 @@ export class CartComponent implements OnInit {
       product.cartCount -= 1
 
     if (product.cartCount == 0) {
-      let index = this.products.indexOf(product)
-      this.products.splice(index, 1)
+      this.cartService.deleteProduct(product)
     }
   }
 

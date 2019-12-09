@@ -26,7 +26,7 @@ export class AddTripComponent implements OnInit {
       country: new FormControl("", Validators.required),
       startDate: new FormControl("", [Validators.required]),
       endDate: new FormControl("", [Validators.required]),
-      cost: new FormControl("", [Validators.required, Validators.min(0)]),
+      price: new FormControl("", [Validators.required, Validators.min(0)]),
       maxSeats: new FormControl("", [Validators.required, Validators.min(0)]),
       currency: new FormControl(),
       description: new FormControl()

@@ -31,10 +31,10 @@ export class TripsComponent implements OnInit {
     let price = product.price;
 
     let max = this.products.length
-    if (price == this.products[0].price) {
+    if (price == this.products[0].price && this.products.length > 1) {
       return 'cheapest'
     }
-    if (price == this.products[max - 1].price) {
+    if (price == this.products[max - 1].price && this.products.length > 1) {
       return 'expensive'
     }
     else
@@ -46,7 +46,7 @@ export class TripsComponent implements OnInit {
   }
 
   sortTrips(products: Trip[]) {
-    return products.sort((a, b) => this.currencyService.convert(a.price, a.currency) - this.currencyService.convert(b.price, b.currency))
+    return products.sort((a, b) => a.price - b.price)
   }
 
   getTrips() {
@@ -68,8 +68,6 @@ export class TripsComponent implements OnInit {
   }
 
   removeProduct(product: Trip) {
-    // return this.firedb.deleteTripById(product._id)
-
     return this.tripService.deleteProduct(product).subscribe(
       response => {
         this.getTrips();

@@ -49,7 +49,9 @@ export class RegisterComponent implements OnInit {
       (user) => {
         let { password, confirmPassword, ...userData } = this.registerForm.value;
         userData.role = "USER";
-        this.userService.addUser(userData).pipe(map((user: User) => console.log(user)));
+        this.userService.addUser(userData).subscribe(
+          data => console.log(data)
+        )
         this.router.navigateByUrl('/app')
       }
     )

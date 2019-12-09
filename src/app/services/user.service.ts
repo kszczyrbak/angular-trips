@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/user.model';
+import { User, SecurityRole } from '../models/user.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -9,15 +9,9 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  currentUser: User;
-
-  private apiUrl: string = `http://${environment.backendUrl}/users`
+  private apiUrl: string = `http://localhost:5000/users`
 
   constructor(private httpClient: HttpClient) {
-    this.getUsers().subscribe(
-      users => console.log(users),
-      err => console.log(err)
-    )
   }
 
   getUsers(): Observable<User[]> {
@@ -30,6 +24,10 @@ export class UserService {
 
   addUser(user: User): Observable<User> {
     return this.httpClient.post<User>(this.apiUrl, user)
+  }
+
+  getUserRole(email: String) {
+    return this.httpClient.get<SecurityRole>(`${this.apiUrl}/role/${email}`);
   }
 
 

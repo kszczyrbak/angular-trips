@@ -1,4 +1,7 @@
 .clickable:hover {
   cursor: pointer;
+}
 
+.clickable {
+  color: white;
 }

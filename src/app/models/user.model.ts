@@ -1,5 +1,6 @@
 export enum SecurityRole {
-    USER, ADMIN
+    USER = "USER", 
+    ADMIN = "ADMIN"
 }
 
 export class User {

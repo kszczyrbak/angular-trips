@@ -44,7 +44,7 @@
     <div class="col-sm">
       <div class="form-group">
         <label>Price</label>
-        <input #price type="number" class="form-control" formControlName="cost" />
+        <input #price type="number" class="form-control" formControlName="price" />
         <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
           <div class="small" *ngIf="price.errors['required']">
             Price is required.
@@ -57,24 +57,16 @@
     </div>
     <div class="col-sm">
       <div class="form-group">
-        <label>Currency</label>
-        <select #curr class="form-control">
-          <option *ngFor="let curr of currencies" [value]="curr" [label]="currency[curr]"></option>
-        </select>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label>Number of seats</label>
-    <input #maxSeats type="number" class="form-control" formControlName="maxSeats" />
-    <div *ngIf="maxSeats.invalid && (maxSeats.dirty || maxSeats.touched)" class="alert alert-danger">
-      <div class="small" *ngIf="maxSeats.errors['required']">
-        Number of seats is required.
-      </div>
-      <div class="small" *ngIf="maxSeats.errors['badFormat']">
-        Number of seats in bad format.
+        <label>Number of seats</label>
+        <input #maxSeats type="number" class="form-control" formControlName="maxSeats" />
+        <div *ngIf="maxSeats.invalid && (maxSeats.dirty || maxSeats.touched)" class="alert alert-danger">
+          <div class="small" *ngIf="maxSeats.errors['required']">
+            Number of seats is required.
+          </div>
+          <div class="small" *ngIf="maxSeats.errors['badFormat']">
+            Number of seats in bad format.
+          </div>
+        </div>
       </div>
     </div>
   </div>

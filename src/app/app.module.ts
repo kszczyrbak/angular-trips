@@ -27,6 +27,8 @@ import { FiredbService } from './services/firedb.service';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthService } from './services/auth.service';
+import { AdminComponent } from './admin/admin.component';
 
 
 
@@ -45,6 +47,7 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    AdminComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -64,7 +67,7 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [FiredbService],
+  providers: [FiredbService, AuthService],
   bootstrap: [AppComponent],
   entryComponents: [AddTripComponent]
 })
