@@ -49,13 +49,13 @@ app.post('/trips', function (req, res) {
 
   trip.save(function (err) {
     if (err) throw err;
-    res.json(trip)
+    res.status(200).json(trip)
   })
 })
 
 app.get('/trips', function (req, res) {
   Trip.find({}).then(function (trips) {
-    res.json(trips);
+    res.status(200).json(trips);
   })
 });
 
@@ -63,7 +63,7 @@ app.get('/trips/:id', function (req, res) {
   Trip.findOne({
     _id: req.params.id
   }).then(function (trip) {
-    res.json(trip);
+    res.status(200).json(trip);
   })
 });
 
@@ -73,7 +73,7 @@ app.put('/trips/:id', function (req, res) {
   Trip.updateOne({
     _id: req.params.id
   }, patchBody).then(function (trip) {
-    res.json(trip);
+    res.status(200).json(trip);
   })
 });
 
@@ -84,7 +84,7 @@ app.delete('/trips/:id', function (req, res) {
     if (err) throw err;
   })
 
-  res.sendStatus(200);
+  res.status(200).json({"message": "OK"});
 });
 
 app.delete('/trips/', function (req, res) {
@@ -92,7 +92,7 @@ app.delete('/trips/', function (req, res) {
     if (err) throw err;
   })
 
-  res.sendStatus(200);
+  res.status(200).json({"message": "OK"});
 });
 
 app.post('/users', function (req, res) {
@@ -101,13 +101,13 @@ app.post('/users', function (req, res) {
   user.save(function (err) {
     if (err) throw err;
     console.log(user._id)
-    res.json(user)
+    res.status(200).json(user)
   })
 })
 
 app.get('/users', function (req, res) {
   User.find({}).then(function (users) {
-    res.json(users);
+    res.status(200).json(users);
   })
 });
 
@@ -115,7 +115,7 @@ app.get('/users/:id', function (req, res) {
   User.findOne({
     _id: req.params.id
   }).then(function (user) {
-    res.json(user);
+    res.status(200).json(user);
   })
 });
 
@@ -125,7 +125,7 @@ app.put('/users/:id', function (req, res) {
   User.updateOne({
     _id: req.params.id
   }, patchBody).then(function (user) {
-    res.json(user);
+    res.status(200).json(user);
   })
 });
 
@@ -136,7 +136,7 @@ app.delete('/users/:id', function (req, res) {
     if (err) throw err;
   })
 
-  res.sendStatus(200);
+  res.status(200).json({"message": "OK"});
 });
 
 app.delete('/users/', function (req, res) {
@@ -144,7 +144,7 @@ app.delete('/users/', function (req, res) {
     if (err) throw err;
   })
 
-  res.sendStatus(200);
+  res.status(200).json({"message": "OK"});
 });
 
 

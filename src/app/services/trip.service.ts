@@ -25,7 +25,7 @@ export class TripService {
     if (!product.photo)
       product.photo = 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
     product.seatsLeft = product.maxSeats
-    return this.httpClient.post(this.apiUrl, product);
+    return this.httpClient.post<Trip>(this.apiUrl, product);
   }
 
   deleteProduct(product: Trip) {

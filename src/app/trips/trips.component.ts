@@ -8,6 +8,7 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { FiredbService } from '../services/firedb.service';
 import { photoPlaceholder } from 'src/assets/fake-dane';
 import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-trips',
@@ -23,7 +24,7 @@ export class TripsComponent implements OnInit {
   products: Trip[] = [
   ]
 
-  constructor(private tripService: TripService, private dialog: MatDialog, private currencyService: CurrencyService, private firedb: FiredbService, private userService: UserService) {
+  constructor(private tripService: TripService, private dialog: MatDialog, private currencyService: CurrencyService, private userService: UserService) {
   }
 
   getBorderClass(product: Trip) {
@@ -50,7 +51,9 @@ export class TripsComponent implements OnInit {
 
   getTrips() {
     this.tripService.getProducts().subscribe(
-      products => this.products = this.sortTrips(products),
+      products => {
+        this.products = this.sortTrips(products)
+      },
       error => console.log(error)
     )
   }
@@ -67,7 +70,12 @@ export class TripsComponent implements OnInit {
   removeProduct(product: Trip) {
     // return this.firedb.deleteTripById(product._id)
 
-    return this.tripService.deleteProduct(product)
+    return this.tripService.deleteProduct(product).subscribe(
+      response => {
+        this.getTrips();
+      },
+      err => console.log(err)
+    )
   }
 
   getMaxId() {
@@ -86,12 +94,20 @@ export class TripsComponent implements OnInit {
       if (data != undefined) {
         // data._id = this.getMaxId();
         data.photo = photoPlaceholder;
-        this.tripService.addProduct(data);
-        // this.firedb.addTrip(data).then(() =>
-        //   console.log('Added trip', data)
-        // )
+        this.tripService.addProduct(data).subscribe(
+          data => {
+            this.getTrips();
+            // this.toastr.success('Successfully added a trip!', 'Success!')
+          },
+          err => {
+            console.log(err)
+            // this.toastr.error('Error adding a trip', 'Oops!');
+          })
       }
-    });
-  }
+    })
 
+    // this.firedb.addTrip(data).then(() =>
+    //   console.log('Added trip', data)
+    // )
+  }
 }

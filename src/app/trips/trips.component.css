@@ -10,8 +10,17 @@
   border: 1px solid black;
 }
 
+body {
+  overflow-x: hidden;
+}
+
+.col-md-2 {
+  margin: none;
+}
+
 .container-fluid {
   height: 100%;
+  margin: none;
 }
 
 .no-padding {
