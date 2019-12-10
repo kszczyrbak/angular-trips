@@ -20,6 +20,18 @@ export class AddTripComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<AddTripComponent>) { }
 
+  get name() {
+    return this.addTripForm.get('name')
+  }
+
+  get maxSeats() {
+    return this.addTripForm.get('maxSeats')
+  }
+
+  get price() {
+    return this.addTripForm.get('price')
+  }  
+
   ngOnInit() {
     this.addTripForm = new FormGroup({
       name: new FormControl("", [Validators.minLength(4), Validators.required]),
@@ -34,7 +46,6 @@ export class AddTripComponent implements OnInit {
     this.addTripForm.controls['startDate'].setValue(new Date())
 
     this.currencies = Object.keys(this.currency).filter(k => !isNaN(Number(k)))
-
   }
 
   submit() {

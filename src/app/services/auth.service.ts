@@ -21,7 +21,6 @@ export class AuthService {
   private userRole: SecurityRole = null;
 
   getUserRole(): Promise<SecurityRole> {
-    // this.spinnerService.show()
     if (!this.userRole) {
       return this.userService.getUserRole(this.user.email).toPromise()
     }
