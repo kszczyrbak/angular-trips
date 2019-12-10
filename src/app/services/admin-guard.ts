@@ -12,6 +12,8 @@ export class AdminGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return (this.authService.userRole == SecurityRole.ADMIN)
+    return this.authService.getUserRole().then(
+      role => (role == SecurityRole.ADMIN)
+    )
   }
 }

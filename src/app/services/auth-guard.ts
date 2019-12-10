@@ -15,20 +15,7 @@ export class AuthGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.authService.authState$.pipe(map(state => {
       if (state != null) {
-        if (this.authService.userRole)
-          return true;
-        else {
-          this.authService.getUserRole(state.email).subscribe(
-            role => {
-              this.authService.setUserRole(role)
-              return true;
-            },
-            err => {
-              this.authService.setUserRole("USER")
-              return true;
-            }
-          )
-        }
+        return true;
       }
       this.router.navigate(['/login']);
       return false;

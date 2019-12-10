@@ -40,13 +40,8 @@ export class LoginComponent implements OnInit {
     this.spinnerService.show();
     this.authService.login(this.loginForm.value)
       .then((credentials) => {
-        this.authService.getUserRole(credentials.user.email).subscribe(
-          role => {
-            this.authService.setUserRole(role)
-            this.spinnerService.hide();
-            this.router.navigateByUrl('/app');
-          }
-        )
+        this.spinnerService.hide();
+        this.router.navigateByUrl('/app');
       })
       .catch((error) => {
         console.log(error);

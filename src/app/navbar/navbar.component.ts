@@ -20,8 +20,9 @@ export class NavbarComponent implements OnInit {
     this.cartService.cartCount$.subscribe(
       count => this.cartCount = count
     )
-    this.isAdmin = (this.authService.userRole == SecurityRole.ADMIN)
-
+    this.authService.getUserRole().then(
+      role => this.isAdmin = (role == SecurityRole.ADMIN)
+    )
   }
 
   logout() {

@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
 import { UserService } from './user.service';
 import { SecurityRole } from '../models/user.model';
+import { SpinnerOverlayService } from '../spinner/spinner-overlay.service';
+import { Router } from '@angular/router';
 
 export interface Credentials {
   email: string;
@@ -16,30 +18,28 @@ export interface Credentials {
 export class AuthService {
   readonly authState$: Observable<User | null> = this.fireAuth.authState;
 
-  userRole: SecurityRole;
+  private userRole: SecurityRole = null;
+
+  getUserRole(): Promise<SecurityRole> {
+    // this.spinnerService.show()
+    if (!this.userRole) {
+      return this.userService.getUserRole(this.user.email).toPromise()
+    }
+    else {
+      return Promise.resolve(this.userRole)
+    }
+  }
 
   get user(): User | null {
     return this.fireAuth.auth.currentUser;
   }
 
-  constructor(private fireAuth: AngularFireAuth, private userService: UserService) {
+  constructor(private fireAuth: AngularFireAuth, private userService: UserService, private spinnerService: SpinnerOverlayService, private router: Router) {
   }
 
-  setUserRole(role: string) {
-    switch (role) {
-      case "ADMIN": {
-        this.userRole = SecurityRole.ADMIN;
-        break;
-      }
-      default: {
-        this.userRole = SecurityRole.USER;
-        break;
-      }
-    }
-  }
+  private authenticate() {
 
-  getUserRole(email: string) {
-    return this.userService.getUserRole(email)
+    return this.userService.getUserRole(this.user.email)
   }
 
   login({ email, password }: Credentials) {
