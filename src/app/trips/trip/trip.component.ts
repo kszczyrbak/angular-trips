@@ -30,7 +30,10 @@ export class TripComponent implements OnInit {
   }
 
   unbook() {
-    if (this.tripData.seatsLeft < this.tripData.maxSeats) this.tripData.seatsLeft += 1
+    if (this.tripData.seatsLeft < this.tripData.maxSeats) {
+      this.cartService.unbookProduct(this.tripData)
+      this.tripData.seatsLeft += 1
+    }
   }
 
   onRate($event: { oldValue: number, newValue: number }) {

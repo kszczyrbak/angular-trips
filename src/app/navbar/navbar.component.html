@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="" routerLinkActive="active">Trips</a>
+  <a class="navbar-brand clickable" style="color: white;" routerLink="" routerLinkActive="active">Trips</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -12,7 +12,7 @@
           <span class="badge badge-dark">{{cartCount}}</span>
         </a>
       </li>
-      <li class="nav-item active ml-4" *ngIf="userRole == SecurityRole.ADMIN">
+      <li class="nav-item active ml-4" *ngIf="isAdmin">
         <a class="btn btn-success" routerLink="admin" routerLinkActive="active">Admin</a>
       </li>
       <li class="nav-item active ml-4 clickable">

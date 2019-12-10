@@ -9,6 +9,7 @@ import { FiredbService } from '../services/firedb.service';
 import { photoPlaceholder } from 'src/assets/fake-dane';
 import { UserService } from '../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { SpinnerOverlayService } from '../spinner/spinner-overlay.service';
 
 @Component({
   selector: 'app-trips',
@@ -24,7 +25,7 @@ export class TripsComponent implements OnInit {
   products: Trip[] = [
   ]
 
-  constructor(private tripService: TripService, private dialog: MatDialog, private currencyService: CurrencyService, private userService: UserService) {
+  constructor(private tripService: TripService, private dialog: MatDialog, private currencyService: CurrencyService, private userService: UserService, private spinnerService: SpinnerOverlayService) {
   }
 
   getBorderClass(product: Trip) {
@@ -50,9 +51,11 @@ export class TripsComponent implements OnInit {
   }
 
   getTrips() {
+    this.spinnerService.show();
     this.tripService.getProducts().subscribe(
       products => {
         this.products = this.sortTrips(products)
+        this.spinnerService.hide();
       },
       error => console.log(error)
     )
@@ -60,11 +63,6 @@ export class TripsComponent implements OnInit {
 
   ngOnInit() {
     this.getTrips();
-
-    // this.firedb.fetchTrips().subscribe(
-    //   (trips: Trip[]) => this.products = this.sortTrips(trips),
-    //   error => console.log(error)
-    // )
   }
 
   removeProduct(product: Trip) {

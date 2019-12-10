@@ -29,8 +29,11 @@ import { HomeComponent } from './home/home.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthService } from './services/auth.service';
 import { AdminComponent } from './admin/admin.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { SpinnerOverlayComponent } from './spinner/spinner-overlay/spinner-overlay.component';
 
-
+//TODO: Rating functionality, probably a rating service
 
 @NgModule({
   declarations: [
@@ -48,6 +51,8 @@ import { AdminComponent } from './admin/admin.component';
     RegisterComponent,
     HomeComponent,
     AdminComponent,
+    SpinnerComponent,
+    SpinnerOverlayComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -60,6 +65,7 @@ import { AdminComponent } from './admin/admin.component';
     FormsModule,
     MatSidenavModule,
     HttpClientModule,
+    NgbModule,
     // HttpClientInMemoryWebApiModule.forRoot(InMemoryTripService),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
@@ -69,6 +75,6 @@ import { AdminComponent } from './admin/admin.component';
   ],
   providers: [FiredbService, AuthService],
   bootstrap: [AppComponent],
-  entryComponents: [AddTripComponent]
+  entryComponents: [AddTripComponent, SpinnerOverlayComponent]
 })
 export class AppModule { }

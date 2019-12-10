@@ -16,6 +16,8 @@ export class FilterComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
+  //TODO: Fix filters
+
   ngOnInit() {
     this.filterForm = this.fb.group({
       priceMin: new FormControl(''),

@@ -34,6 +34,12 @@ export class CartService {
     this.cartCount$.next(this.cartProducts.length)
   }
 
+  unbookProduct(product: Trip) {
+    product.cartCount -= 1;
+    if (product.cartCount == 0)
+      this.deleteProduct(product)
+  }
+
   deleteProduct(product: Trip) {
     let index = this.cartProducts.indexOf(product)
     if (index > -1) {

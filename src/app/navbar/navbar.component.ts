@@ -12,7 +12,7 @@ import { SecurityRole } from '../models/user.model';
 export class NavbarComponent implements OnInit {
 
   cartCount: number = 0;
-  userRole: SecurityRole;
+  isAdmin = false;
 
   constructor(private authService: AuthService, private router: Router, private cartService: CartService) { }
 
@@ -20,6 +20,8 @@ export class NavbarComponent implements OnInit {
     this.cartService.cartCount$.subscribe(
       count => this.cartCount = count
     )
+    this.isAdmin = (this.authService.userRole == SecurityRole.ADMIN)
+
   }
 
   logout() {
