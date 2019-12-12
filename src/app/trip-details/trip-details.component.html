@@ -5,19 +5,47 @@
     <div class="title pt-4">
       <h1>{{trip.name}}</h1>
     </div>
+    <div class="subtitle">
+      <h2>{{trip.country}}</h2>
+    </div>
     <div class="d-flex flex-row justify-content-sm-around p-4 border-top">
       <div class="col-md-4">
-        <div class="photo">
-          <img [src]="trip.photo" class="img-fluid clickable">
+        <ngb-carousel>
+          <ng-template ngbSlide>
+            <div class="picsum-img-wrapper">
+              <img [src]="trip.photo" alt="Random first slide">
+            </div>
+          </ng-template>
+          <ng-template ngbSlide>
+            <div class="picsum-img-wrapper">
+              <img [src]="trip.photo" alt="Random first slide">
+            </div>
+          </ng-template>
+          <ng-template ngbSlide>
+            <div class="picsum-img-wrapper">
+              <img [src]="trip.photo" alt="Random first slide">
+            </div>
+          </ng-template>
+        </ngb-carousel>
+        <div class="price pt-4 d-flex flex-row justify-content-sm-between align-items-center">
+          <h3>Price:</h3>
+          <h5>{{trip.price}} zł</h5>
         </div>
-        <div class="d-flex flex-row justify-content-start align-items-start pt-4">
-          <div class="text mr-2">
-            <h4>Rating: </h4>
+        <div class="d-flex flex-row justify-content-sm-between align-items-center pt-4">
+          <div class="text">
+            <h3>Rating: </h3>
           </div>
-          <div class="rating pb-1">
+          <div class="rating">
             <star-rating [value]="trip.rating" checkedcolor="orange" uncheckedcolor="black" size="20px" readonly="false"
               (rate)="onRate($event)"></star-rating>
           </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-flex flex-column justify-content-sm-between">
+        <div class="description">
+          <h3>Description:</h3>
+          <hr />
+          {{trip.description}}
         </div>
         <div class="seats d-flex flex-row justify-content-sm-between align-items-center pt-2">
           <h4>Seats left: {{trip.seatsLeft}}</h4>
@@ -31,23 +59,6 @@
                 -
               </button>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="subtitle pt-2">
-          <h3>Country</h3>
-          <hr/>
-          <h5>{{trip.country}}</h5>
-        </div>
-        <div class="pt-2">
-          <div class="cost">
-            <h2>{{trip.cost}} {{trip.currency | currency}}</h2>
-          </div>
-          <div class="description mt-4 mb-4">
-            <h3>Description</h3>
-            <hr/>
-            {{trip.description}}
           </div>
         </div>
       </div>
