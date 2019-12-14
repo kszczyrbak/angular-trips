@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="add-button text-center">
+    <button class="btn btn-success m-4">
+      Add a trip
+    </button>
+  </div>
+  <div class="content mt-4">
+    <table class="table table-striped mt-4">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Country</th>
+          <th scope="col">Price</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trip of trips" class="hoverable">
+          <td class="align-middle" scope="row">{{trip._id}}</td>
+          <td class="align-middle">
+            {{ trip.name }}
+          </td>
+          <td class="align-middle">{{ trip.country }}</td>
+          <td class="align-middle">{{ trip.price }}zł</td>
+          <td class="vert-aligned">
+            <button class="btn btn-dark btn-sm mr-2" (click)="edit(trip)">
+              Edit
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="delete(trip)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

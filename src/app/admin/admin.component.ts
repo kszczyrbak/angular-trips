@@ -9,14 +9,9 @@ import { Trip } from '../models/trip.model';
 })
 export class AdminComponent implements OnInit {
 
-  trips: Trip[]
-
-  constructor(private tripService: TripService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.tripService.getProducts().subscribe(
-      products => this.trips = products
-    )
   }
 
 }

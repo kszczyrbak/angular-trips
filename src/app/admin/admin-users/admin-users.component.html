@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="content mt-4">
+    <table class="table table-striped mt-4">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Email</th>
+          <th scope="col">Name</th>
+          <th scope="col">Role</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users" class="hoverable">
+          <td class="align-middle" scope="row">{{user._id}}</td>
+          <td class="align-middle">
+            {{ user.email }}
+          </td>
+          <td class="align-middle">{{ user.firstName }} {{user.lastName}} </td>
+          <td class="align-middle">{{ user.role }}</td>
+          <td class="vert-aligned">
+            <button class="btn btn-dark btn-sm mr-2" [disabled]="isAdmin(user)">
+              Edit
+            </button>
+            <button class="btn btn-danger btn-sm" [disabled]="isAdmin(user)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -32,6 +32,8 @@ import { AdminComponent } from './admin/admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerOverlayComponent } from './spinner/spinner-overlay/spinner-overlay.component';
+import { AdminTripsComponent } from './admin/admin-trips/admin-trips.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 
 //TODO: Rating functionality, probably a rating service
 
@@ -53,6 +55,8 @@ import { SpinnerOverlayComponent } from './spinner/spinner-overlay/spinner-overl
     AdminComponent,
     SpinnerComponent,
     SpinnerOverlayComponent,
+    AdminTripsComponent,
+    AdminUsersComponent,
   ],
   imports: [
     AppRoutingModule,

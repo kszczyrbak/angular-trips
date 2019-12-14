@@ -81,23 +81,28 @@ app.delete('/trips/:id', function (req, res) {
   Trip.deleteOne({
     _id: req.params.id
   }, function (err) {
-    if (err) throw err;
+    if (err) {
+      res.status(400).json({
+        "message": err
+      })
+    };
+    res.status(200).json({
+      "message": "OK"
+    });
   })
 
-  res.status(200).json({
-    "message": "OK"
-  });
+
 });
 
-app.delete('/trips/', function (req, res) {
-  Trip.deleteMany({}, function (err) {
-    if (err) throw err;
-  })
+// app.delete('/trips/', function (req, res) {
+//   Trip.deleteMany({}, function (err) {
+//     if (err) throw err;
+//   })
 
-  res.status(200).json({
-    "message": "OK"
-  });
-});
+//   res.status(200).json({
+//     "message": "OK"
+//   });
+// });
 
 app.post('/users', function (req, res) {
   var user = new User(req.body);
@@ -145,23 +150,26 @@ app.delete('/users/:id', function (req, res) {
   User.deleteOne({
     _id: id
   }, function (err) {
-    if (err) throw err;
+    if (err) {
+      res.status(400).json({
+        "message": err
+      })
+    };
+    res.status(200).json({
+      "message": "OK"
+    });
   })
-
-  res.status(200).json({
-    "message": "OK"
-  });
 });
 
-app.delete('/users/', function (req, res) {
-  User.deleteMany({}, function (err) {
-    if (err) throw err;
-  })
+// app.delete('/users/', function (req, res) {
+//   User.deleteMany({}, function (err) {
+//     if (err) throw err;
+//   })
 
-  res.status(200).json({
-    "message": "OK"
-  });
-});
+//   res.status(200).json({
+//     "message": "OK"
+//   });
+// });
 
 
 app.listen(5000);

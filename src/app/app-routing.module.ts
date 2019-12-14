@@ -16,10 +16,13 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     {
         path: 'app', component: HomeComponent, canActivate: [AuthGuard], children: [
-            { path: '', component: TripsComponent, },
+            { path: '', redirectTo: 'trips', pathMatch: 'full' },
+            { path: 'trips', component: TripsComponent },
             { path: 'cart', component: CartComponent },
             { path: 'trip/:id', component: TripDetailsComponent },
-            { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] }
+            {
+                path: 'admin', component: AdminComponent, canActivate: [AdminGuard]
+            }
         ]
     },
 
