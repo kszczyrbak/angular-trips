@@ -34,9 +34,12 @@ const Trip = mongoose.model('Trip', {
   photo: String
 });
 
+const Review = mongoose.model('Review', {
+
+})
+
 const User = mongoose.model('User', {
-  firstName: String,
-  lastName: String,
+  name: String,
   email: String,
   role: {
     type: String,
@@ -123,6 +126,15 @@ app.get('/users', function (req, res) {
 app.get('/users/:id', function (req, res) {
   User.findOne({
     _id: req.params.id
+  }).then(function (user) {
+    res.status(200).json(user);
+  })
+});
+
+
+app.get('/users/email/:email', function (req, res) {
+  User.findOne({
+    email: req.params.email
   }).then(function (user) {
     res.status(200).json(user);
   })

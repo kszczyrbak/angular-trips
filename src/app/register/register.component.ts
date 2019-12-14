@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { User } from '../models/user.model';
+import { AppUser } from '../models/user.model';
 import { map } from 'rxjs/operators'
 
 @Component({

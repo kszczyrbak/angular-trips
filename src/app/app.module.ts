@@ -34,6 +34,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerOverlayComponent } from './spinner/spinner-overlay/spinner-overlay.component';
 import { AdminTripsComponent } from './admin/admin-trips/admin-trips.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserFrameComponent } from './user-frame/user-frame.component';
 
 //TODO: Rating functionality, probably a rating service
 
@@ -57,6 +59,8 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
     SpinnerOverlayComponent,
     AdminTripsComponent,
     AdminUsersComponent,
+    UserDetailsComponent,
+    UserFrameComponent,
   ],
   imports: [
     AppRoutingModule,

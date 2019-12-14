@@ -20,7 +20,8 @@ body {
 
 .container-fluid {
   height: 100%;
-  margin: none;
+  margin: 0;
+  padding: 0;
 }
 
 .no-padding {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User, SecurityRole } from '../models/user.model';
+import { SecurityRole, AppUser } from '../models/user.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -14,20 +14,29 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.apiUrl)
+  getUsers(): Observable<AppUser[]> {
+    return this.httpClient.get<AppUser[]>(this.apiUrl)
+  }
+  AppUser
+  getUser(id: number): Observable<AppUser> {
+    return this.httpClient.get<AppUser>(`${this.apiUrl}/${id}`)
   }
 
-  getUser(id: number): Observable<User> {
-    return this.httpClient.get<User>(`${this.apiUrl}/${id}`)
+  addUser(user: AppUser): Observable<AppUser> {
+    return this.httpClient.post<AppUser>(this.apiUrl, user)
   }
 
-  addUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.apiUrl, user)
+  // getUserRole(email: String) {
+  //   return this.httpClient.get<SecurityRole>(`${this.apiUrl}/role/${email}`);
+  // }
+
+  getUserByEmail(email: string): Observable<AppUser> {
+    return this.httpClient.get<AppUser>(`${this.apiUrl}/email/${email}`);
   }
 
-  getUserRole(email: String) {
-    return this.httpClient.get<SecurityRole>(`${this.apiUrl}/role/${email}`);
+  deleteUser(user: AppUser) {
+    let _id = user._id;
+    return this.httpClient.delete(`${this.apiUrl}/${_id}`);
   }
 
 

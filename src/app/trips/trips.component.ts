@@ -78,32 +78,7 @@ export class TripsComponent implements OnInit {
     return this.products.map(trip => trip._id).sort((a, b) => (a > b) ? -1 : 1)[0] + 1
   }
 
-  openDialog() {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-
-    const dialogRef = this.dialog.open(AddTripComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(data => {
-      if (data != undefined) {
-        // data._id = this.getMaxId();
-        data.photo = photoPlaceholder;
-        this.tripService.addProduct(data).subscribe(
-          data => {
-            this.getTrips();
-            // this.toastr.success('Successfully added a trip!', 'Success!')
-          },
-          err => {
-            console.log(err)
-            // this.toastr.error('Error adding a trip', 'Oops!');
-          })
-      }
-    })
-
-    // this.firedb.addTrip(data).then(() =>
-    //   console.log('Added trip', data)
-    // )
-  }
+  // this.firedb.addTrip(data).then(() =>
+  //   console.log('Added trip', data)
+  // )
 }

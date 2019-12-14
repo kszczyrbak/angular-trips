@@ -29,6 +29,11 @@ export class TripService {
     return this.httpClient.post<Trip>(this.apiUrl, product);
   }
 
+  editProduct(product: Trip) {
+    let _id = product._id;
+    return this.httpClient.put<Trip>(`${this.apiUrl}/${_id}`, product);
+  }
+
   deleteProduct(product: Trip) {
     let _id = product._id;
     return this.httpClient.delete<Trip>(`${this.apiUrl}/${_id}`);

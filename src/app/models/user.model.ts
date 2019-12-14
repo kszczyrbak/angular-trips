@@ -1,12 +1,11 @@
 export enum SecurityRole {
-    USER = "USER", 
+    USER = "USER",
     ADMIN = "ADMIN"
 }
 
-export class User {
+export class AppUser {
     _id: string;
-    firstName: string;
-    lastName: string;
+    name: string;
     email: string;
     role: SecurityRole;
 }

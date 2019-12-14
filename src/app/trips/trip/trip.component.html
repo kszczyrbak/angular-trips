@@ -6,12 +6,12 @@
   </div>
   <div class="row p-2">
     <div class="col-md-6 text-center">
-      <img [src]="tripData.photo" class="card-img-top round border clickable" [routerLink]="['trip', tripData._id]"
+      <img [src]="tripData.photo" class="card-img-top round border clickable" [routerLink]="['/app/trip', tripData._id]"
         routerLinkActive="active">
     </div>
-    <div class="col-md-6 d-flex flex-row justify-content-center">
-      <div class="d-flex align-items-center">
-        <h2>{{tripData.price}} zł</h2>
+    <div class="col-md-6 d-flex flex-row">
+      <div class="d-flex justify-content-start align-items-center">
+        <h3>{{tripData.price}}zł</h3>
       </div>
     </div>
   </div>
@@ -39,10 +39,10 @@
         <h4 *ngIf="tripData.seatsLeft == 0" class="text-danger">{{tripData.seatsLeft}}</h4>
       </div>
     </div>
-    <div class="mt-2 d-flex flex-row justify-content-center">
+    <!-- <div class="mt-2 d-flex flex-row justify-content-center">
       <button class="btn btn-dark onHover" (click)="removeProduct()">
         Delete
       </button>
-    </div>
+    </div> -->
   </div>
 </div>

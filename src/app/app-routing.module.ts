@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminGuard } from './services/admin-guard';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
             { path: 'trips', component: TripsComponent },
             { path: 'cart', component: CartComponent },
             { path: 'trip/:id', component: TripDetailsComponent },
+            { path: 'user/:id', component: UserDetailsComponent },
             {
                 path: 'admin', component: AdminComponent, canActivate: [AdminGuard]
             }

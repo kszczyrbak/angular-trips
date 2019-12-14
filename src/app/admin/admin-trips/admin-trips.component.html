@@ -1,6 +1,6 @@
 <div class="container-fluid">
-  <div class="add-button text-center">
-    <button class="btn btn-success m-4">
+  <div class="buttons">
+    <button class="btn btn-success" (click)="addTrip()">
       Add a trip
     </button>
   </div>
@@ -17,7 +17,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let trip of trips" class="hoverable">
-          <td class="align-middle" scope="row">{{trip._id}}</td>
+          <td class="align-middle" scope="row">
+            <a [routerLink]="['/app/trip', trip._id]">{{trip._id}}</a>
+          </td>
           <td class="align-middle">
             {{ trip.name }}
           </td>

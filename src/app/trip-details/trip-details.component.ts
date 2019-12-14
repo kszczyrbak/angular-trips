@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TripService } from '../services/trip.service';
 import { Trip } from '../models/trip.model';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-trip-details',
@@ -12,7 +14,7 @@ export class TripDetailsComponent implements OnInit {
 
   trip: Trip
 
-  constructor(private route: ActivatedRoute, private tripService: TripService) {
+  constructor(private route: ActivatedRoute, private tripService: TripService, private _location: Location) {
   }
 
   ngOnInit() {
@@ -25,7 +27,10 @@ export class TripDetailsComponent implements OnInit {
         error => console.log(error)
       )
     )
+  }
 
+  goBack() {
+    this._location.back();
   }
 
   book() {

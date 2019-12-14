@@ -19,5 +19,6 @@
         <a class="btn btn-danger" routerLinkActive="active" (click)="logout()" routerLinkActive="active">Logout</a>
       </li>
     </ul>
+    <app-user-frame [userData]="currentUser" class="ml-4" *ngIf="currentUser"></app-user-frame>
   </div>
 </nav>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
-import { SecurityRole } from '../models/user.model';
+import { SecurityRole, AppUser } from '../models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -14,14 +14,20 @@ export class NavbarComponent implements OnInit {
   cartCount: number = 0;
   isAdmin = false;
 
+  currentUser: AppUser;
+
   constructor(private authService: AuthService, private router: Router, private cartService: CartService) { }
 
   ngOnInit() {
     this.cartService.cartCount$.subscribe(
       count => this.cartCount = count
     )
-    this.authService.getUserRole().then(
-      role => this.isAdmin = (role == SecurityRole.ADMIN)
+    this.authService.getCurrentUser().then(
+      user => {
+        console.log(user)
+        this.currentUser = user;
+        this.isAdmin = (this.currentUser.role == SecurityRole.ADMIN)
+      }
     )
   }
 

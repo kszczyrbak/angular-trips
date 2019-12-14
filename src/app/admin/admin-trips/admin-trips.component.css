@@ -19,3 +19,7 @@
 .table tbody>tr>td.vert-aligned {
   vertical-align: middle;
 }
+
+.add-button {
+  display: block;
+}
