@@ -1,12 +1,12 @@
 <!-- TODO: comments -->
 
 <div class="container mt-4 p-4">
-  <div class="d-flex flex-column align-items-center border p-4 box-shadow">
+  <div class="d-flex flex-column align-items-center border p-4 box-shadow" *ngIf="trip">
     <div class="title pt-4">
-      <h1>{{trip.name}}</h1>
+      <h1>{{trip?.name}}</h1>
     </div>
     <div class="subtitle">
-      <h2>{{trip.country}}</h2>
+      <h2>{{trip?.country}}</h2>
     </div>
     <div class="d-flex flex-row justify-content-sm-around p-4 border-top">
       <div class="col-md-4">
@@ -29,14 +29,14 @@
         </ngb-carousel>
         <div class="price pt-4 d-flex flex-row justify-content-sm-between align-items-center">
           <h3>Price:</h3>
-          <h5>{{trip.price}} zł</h5>
+          <h5>{{trip?.price}} zł</h5>
         </div>
         <div class="d-flex flex-row justify-content-sm-between align-items-center pt-4">
           <div class="text">
             <h3>Rating: </h3>
           </div>
           <div class="rating">
-            <star-rating [value]="trip.rating" checkedcolor="orange" uncheckedcolor="black" size="20px" readonly="false"
+            <star-rating [value]="trip?.rating" checkedcolor="orange" uncheckedcolor="black" size="20px" readonly="true"
               (rate)="onRate($event)"></star-rating>
           </div>
         </div>
@@ -45,10 +45,10 @@
         <div class="description">
           <h3>Description:</h3>
           <hr />
-          {{trip.description}}
+          {{trip?.description}}
         </div>
         <div class="seats d-flex flex-row justify-content-sm-between align-items-center pt-2">
-          <h4>Seats left: {{trip.seatsLeft}}</h4>
+          <h4>Seats left: {{trip?.seatsLeft}}</h4>
           <div class="buttons">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-dark" [disabled]="trip.seatsLeft <= 0" (click)="book()">
@@ -63,10 +63,36 @@
         </div>
       </div>
     </div>
+    <div class="buttons d-flex flex-row justify-content-sm-between w-100 pl-4 pr-4">
+      <button type="button" class="btn btn-success" (click)="comment()">
+        Review
+      </button>
+      <button type="button" class="btn btn-danger" (click)="goBack()">
+        Go back
+      </button>
+    </div>
   </div>
-  <div class="buttons">
-    <button type="button" class="btn btn-dark" (click)="goBack()">
-      Go back
-    </button>
+  <button type="button" class="btn btn-dark" (click)="isCommentsCollapsed = !isCommentsCollapsed"
+    [attr.aria-expanded]="!isCommentsCollapsed" aria-controls="collapseExample">
+    Comments
+  </button>
+  <div id="comments" [ngbCollapse]="isCommentsCollapsed">
+    <div class="mt-4">
+      <div class="card" *ngFor="let comment of comments">
+        <div class="card-body">
+          <div class="media p-2">
+            <div class="d-flex align-items-center flex-row rating pr-4 border-right">
+              <h1>
+                <i class="fa fa-star">
+                </i>{{comment.rating}}</h1>
+            </div>
+            <div class="media-body ml-4">
+              <h5 class="mt-0">{{comment.userName}}</h5>
+              {{comment.text}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

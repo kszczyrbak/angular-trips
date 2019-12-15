@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private apiUrl: string = `http://localhost:5000/users`
+  private apiUrl = `${environment.backendUrl}/users`
 
   constructor(private httpClient: HttpClient) {
   }
@@ -17,7 +17,7 @@ export class UserService {
   getUsers(): Observable<AppUser[]> {
     return this.httpClient.get<AppUser[]>(this.apiUrl)
   }
-  AppUser
+  
   getUser(id: number): Observable<AppUser> {
     return this.httpClient.get<AppUser>(`${this.apiUrl}/${id}`)
   }

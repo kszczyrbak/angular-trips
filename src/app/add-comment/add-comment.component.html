@@ -1,0 +1,36 @@
+<div class="d-flex flex-column align-items-center">
+  <h3 class="border-bottom">Review</h3>
+  <h4>{{data.name}}</h4>
+  <h5>{{data.country}}</h5>
+</div>
+<form [formGroup]="addCommentForm" class="pt-4 border-top">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" formControlName="userName" placeholder="Name (optional)">
+  </div>
+  <hr />
+  <div class="form-group">
+    <label>Rating</label>
+    <input type="number" class="form-control" formControlName="rating" min="0" max="5">
+    <div *ngIf="rating.invalid && rating.touched" class="alert alert-danger">
+      <div class="small" *ngIf="rating.errors.required">
+        Rating is required.
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="form-group">
+    <label>Comment</label>
+    <textarea type="text" class="form-control" rows="5" formControlName="text"
+      placeholder="Comment text (optional)"></textarea>
+  </div>
+
+  <div class="d-flex flex-row justify-content-sm-between">
+    <button type="submit" class="btn btn-dark" [disabled]="!addCommentForm.valid" (click)="submit()">
+      Submit
+    </button>
+    <button type="close" class="btn btn-dark" matDialogClose>
+      Close
+    </button>
+  </div>
+</form>

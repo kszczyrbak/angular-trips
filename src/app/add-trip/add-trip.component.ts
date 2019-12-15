@@ -14,10 +14,9 @@ export class AddTripComponent implements OnInit {
 
   @Output() addTrip: EventEmitter<Trip> = new EventEmitter();
 
-  currency = Currency;
-  currencies: string[]
-
   addTripForm: FormGroup;
+
+  currentDate = this.getStringFromDate(new Date(), "yyyy-MM-dd")
 
   constructor(private dialogRef: MatDialogRef<AddTripComponent>, @Inject(MAT_DIALOG_DATA) public data: Trip) { }
 
@@ -39,7 +38,7 @@ export class AddTripComponent implements OnInit {
     console.log(stringDate)
     return stringDate
   }
-  
+
   ngOnInit() {
     this.addTripForm = new FormGroup({
       name: new FormControl("", [Validators.minLength(4), Validators.required]),
@@ -52,24 +51,18 @@ export class AddTripComponent implements OnInit {
 
       description: new FormControl()
     })
-    let currentDate = new Date()
-    this.addTripForm.controls['startDate'].setValue(this.getStringFromDate(currentDate, 'yyyy-MM-dd'))
-    this.addTripForm.controls['endDate'].setValue(this.getStringFromDate(currentDate, 'yyyy-MM-dd'))
+    this.currentDate = this.getStringFromDate(new Date()
+      , 'yyyy-MM-dd')
+    this.addTripForm.controls['startDate'].setValue(this.currentDate)
+    this.addTripForm.controls['endDate'].setValue(this.currentDate)
 
     if (this.data) {
       this.addTripForm.patchValue(this.data)
     }
-
-    this.currencies = Object.keys(this.currency).filter(k => !isNaN(Number(k)))
   }
 
   submit() {
     this.dialogRef.close(this.addTripForm.value);
   }
-
-  close() {
-    this.dialogRef.close();
-  }
-
 
 }

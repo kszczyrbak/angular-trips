@@ -9,7 +9,6 @@
   .hoverable:hover {
     transform: scale(1.01);
     transition: all 0.25s;
-    cursor: pointer;
   }
   
   .table tbody>tr>td {

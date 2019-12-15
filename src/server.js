@@ -34,8 +34,13 @@ const Trip = mongoose.model('Trip', {
   photo: String
 });
 
-const Review = mongoose.model('Review', {
-
+const Comment = mongoose.model('Comment', {
+  trip_id: String,
+  user_id: String,
+  userName: String,
+  date: Date,
+  rating: Number,
+  text: String
 })
 
 const User = mongoose.model('User', {
@@ -53,6 +58,50 @@ app.post('/trips', function (req, res) {
   trip.save(function (err) {
     if (err) throw err;
     res.status(200).json(trip)
+  })
+})
+
+app.put('/trips/:trip_id/comments', function (req, res) {
+  var patchBody = req.body
+  patchBody.trip_id = req.params.trip_id
+
+  Comment.updateOne({
+    user_id: patchBody.user_id,
+    trip_id: patchBody.trip_id
+  }, patchBody, {
+    upsert: true
+  }).then(
+    function (comment) {
+      res.status(200).json(comment)
+      updateTripRating(patchBody.trip_id)
+    }
+  )
+})
+
+function updateTripRating(_trip_id) {
+  Comment.find({
+    trip_id: _trip_id
+  }, function (err, comments) {
+    if (err) throw err;
+    console.log(comments)
+    let newRating = comments.map(comment => comment.rating).reduce((a, b) => a + b, 0) / comments.length
+    Trip.findOneAndUpdate({
+      _id: _trip_id
+    }, {
+      rating: newRating
+    }, {
+      new: true
+    }).then(function (trip) {
+      console.log(trip)
+    })
+  })
+}
+
+app.get('/trips/:trip_id/comments', function (req, res) {
+  Comment.find({
+    trip_id: req.params.trip_id
+  }).where('text').ne("").then(function (comments) {
+    res.status(200).json(comments);
   })
 })
 
@@ -93,8 +142,6 @@ app.delete('/trips/:id', function (req, res) {
       "message": "OK"
     });
   })
-
-
 });
 
 // app.delete('/trips/', function (req, res) {
@@ -160,6 +207,53 @@ app.put('/users/:id', function (req, res) {
 
 app.delete('/users/:id', function (req, res) {
   User.deleteOne({
+    _id: id
+  }, function (err) {
+    if (err) {
+      res.status(400).json({
+        "message": err
+      })
+    };
+    res.status(200).json({
+      "message": "OK"
+    });
+  })
+});
+
+app.post('/comments', function (req, res) {
+  var comment = new Comment(req.body);
+
+  comment.save(function (err) {
+    if (err) throw err;
+    console.log(comment._id)
+    res.status(200).json(comment)
+  })
+})
+
+app.get('/comments/:id', function (req, res) {
+  Comment.findOne({
+    _id: req.params.id
+  }).then(function (comment) {
+    res.status(200).json(comment);
+  })
+});
+
+app.get('/comments', function (req, res) {
+  Comment.find({}).then(function (comments) {
+    res.status(200).json(comments);
+  })
+});
+
+app.get('/comments/trip/:trip_id', function (req, res) {
+  Comment.find({
+    trip_id: req.params.trip_id
+  }).then(function (comments) {
+    res.status(200).json(comments);
+  })
+});
+
+app.delete('/comments/:id', function (req, res) {
+  Comment.deleteOne({
     _id: id
   }, function (err) {
     if (err) {

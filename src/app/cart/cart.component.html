@@ -1,7 +1,10 @@
 <!-- TODO: Change layout to tables?-->
 
 <div class="container-fluid pt-4 mt-4">
-  <div class="pt-4 mt-4">
+  <div class="empty text-center pt-4 m-4" *ngIf="products.length == 0">
+    <h1>There are no items in the cart!</h1>
+  </div>
+  <div class="pt-4 mt-4" *ngIf="products.length > 0">
     <div *ngFor="let product of products"
       class="border mb-4 d-flex flex-row align-items-center justify-content-sm-between">
       <div class="col-2 p-4 text-center">

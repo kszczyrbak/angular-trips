@@ -28,13 +28,13 @@
     <div class="col-sm">
       <div class="form-group">
         <label>Start date</label>
-        <input type="date" class="form-control" formControlName="startDate" />
+        <input type="date" class="form-control" formControlName="startDate" [min]="currentDate" />
       </div>
     </div>
     <div class="col-sm">
       <div class="form-group">
         <label>End date</label>
-        <input type="date" class="form-control" formControlName="endDate" />
+        <input type="date" class="form-control" formControlName="endDate" [min]="currentDate" />
       </div>
     </div>
   </div>
@@ -79,7 +79,7 @@
     <button type="submit" class="btn btn-dark" [disabled]="!addTripForm.valid" (click)="submit()">
       Submit
     </button>
-    <button type="close" class="btn btn-dark" (click)="close()">
+    <button type="close" class="btn btn-dark" matDialogClose>
       Close
     </button>
   </div>

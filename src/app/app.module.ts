@@ -36,6 +36,7 @@ import { AdminTripsComponent } from './admin/admin-trips/admin-trips.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserFrameComponent } from './user-frame/user-frame.component';
+import { AddCommentComponent } from './add-comment/add-comment.component';
 
 //TODO: Rating functionality, probably a rating service
 
@@ -61,6 +62,7 @@ import { UserFrameComponent } from './user-frame/user-frame.component';
     AdminUsersComponent,
     UserDetailsComponent,
     UserFrameComponent,
+    AddCommentComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -83,6 +85,6 @@ import { UserFrameComponent } from './user-frame/user-frame.component';
   ],
   providers: [FiredbService, AuthService],
   bootstrap: [AppComponent],
-  entryComponents: [AddTripComponent, SpinnerOverlayComponent]
+  entryComponents: [AddTripComponent, SpinnerOverlayComponent, AddCommentComponent]
 })
 export class AppModule { }

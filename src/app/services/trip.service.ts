@@ -3,13 +3,14 @@ import { Trip, Currency } from '../models/trip.model';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripService {
 
-  private apiUrl = 'http://localhost:5000/trips'
+  private apiUrl = `${environment.backendUrl}/trips`
 
   constructor(private httpClient: HttpClient) { }
 
