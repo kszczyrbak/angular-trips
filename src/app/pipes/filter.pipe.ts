@@ -8,7 +8,7 @@ export class FilterPipe implements PipeTransform {
 
   transform(products: Trip[], filters: any): Trip[] {
     return products.filter(trip => {
-      if (this.filterPrice(trip, filters) && this.filterDate(trip, filters) && this.filterProperties(trip, filters))
+      if (this.filterPrice(trip, filters) && this.filterDate(trip, filters) && this.filterRating(trip, filters) && this.filterProperties(trip, filters))
         return true;
       else
         return false;
@@ -16,16 +16,20 @@ export class FilterPipe implements PipeTransform {
   }
 
   filterPrice(product: Trip, filters: any) {
-    let val = (filters['priceMin'] ? (product.price > filters['priceMin']) : true) && (filters['priceMax'] ? (product.price < filters['priceMax']) : true);
+    let val = (filters['priceMin'] != null ? (product.price > filters['priceMin']) : true) && (filters['priceMax'] != null ? (product.price < filters['priceMax']) : true);
     return val;
   }
 
   filterDate(product: Trip, filters: any) {
-    return (filters['dateMin'] ? (product.startDate > filters['dateMin']) : true) && (filters['dateMax'] ? (product.endDate < filters['dateMax']) : true);
+    return (filters['dateMin'] != null ? (product.startDate >= filters['dateMin']) : true) && (filters['dateMax'] != null ? (product.endDate <= filters['dateMax']) : true);
+  }
+
+  filterRating(product: Trip, filters: any) {
+    return (filters['ratingMin'] != null ? (product.rating >= filters['ratingMin']) : true) && (filters['ratingMax'] != null ? (product.rating <= filters['ratingMax']) : true);
   }
 
   filterProperties(product: Trip, filters: any) {
-    return (filters['destination'] ? (product.country.includes(filters['destination'])) : true)
+    return (filters['destination'] != null ? (product.country.toLowerCase().includes(filters['destination'].toLowerCase())) : true)
   }
 
 }
