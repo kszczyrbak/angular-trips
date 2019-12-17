@@ -1,6 +1,4 @@
-<div class="wrapper" [routerLink]="['/app/user', userData._id]">
-  <div class="img-circle avatar border box-shadow" [style.width]="stringSize" [style.height]="stringSize"
-    [style.line-height]="stringSize" [style.font-size]="fontSize">
-    <span [style.color]='white' *ngIf="initials">{{initials}}</span>
-  </div>
+<div class="img-circle avatar border box-shadow" [routerLink]="['/app/user', userData._id]" [style.width]="stringSize"
+  [style.height]="stringSize" [style.line-height]="stringSize" [style.font-size]="fontSize">
+  <span [style.color]='white' *ngIf="initials">{{initials}}</span>
 </div>

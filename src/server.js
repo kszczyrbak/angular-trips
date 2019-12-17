@@ -327,6 +327,14 @@ app.get('/orders/user/:user_id',
   }
 )
 
+app.get('/orders/',
+  function (req, res) {
+    Order.find({}).then(function (orders) {
+      res.status(200).json(orders);
+    })
+  }
+)
+
 function checkoutUpdateSeatCount(order) {
   Trip.updateOne({
     _id: order.trip_id

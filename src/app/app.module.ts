@@ -38,7 +38,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserFrameComponent } from './user-frame/user-frame.component';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { HistoryComponent } from './history/history.component';
-import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
     UserFrameComponent,
     AddCommentComponent,
     HistoryComponent,
+    AdminOrdersComponent,
     TimeAgoPipe
   ],
   imports: [

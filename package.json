@@ -35,6 +35,7 @@
     "ng-starrating": "^1.0.7",
     "ngx-toastr": "^11.2.1",
     "rxjs": "~6.4.0",
+    "time-ago-pipe": "^1.3.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

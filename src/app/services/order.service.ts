@@ -21,6 +21,10 @@ export class OrderService {
         return this.httpClient.get<Order[]>(`${this.apiUrl}/user/${user_id}`);
     }
 
+    getOrders() {
+        return this.httpClient.get<Order[]>(this.apiUrl)
+    }
+
     deleteOrder(order: Order) {
         let _id = order._id;
         return this.httpClient.delete(`${this.apiUrl}/${_id}`);
