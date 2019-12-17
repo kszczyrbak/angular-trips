@@ -8,6 +8,11 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddTripComponent } from '../add-trip/add-trip.component';
 import { AddCommentComponent } from '../add-comment/add-comment.component';
 import { CommentService } from '../services/comment.service';
+import { AuthService } from '../services/auth.service';
+import { OrderService } from '../services/order.service';
+import { SpinnerOverlayService } from '../spinner/spinner-overlay.service';
+import { CartService } from '../services/cart.service';
+import { AppUser } from '../models/user.model';
 
 
 @Component({
@@ -20,30 +25,52 @@ export class TripDetailsComponent implements OnInit {
   trip: Trip
 
   comments: Comment[] = []
+  user: AppUser;
 
   hasOrdered: boolean = false;
 
   public isCommentsCollapsed = true;
 
-  constructor(private route: ActivatedRoute, private tripService: TripService, private _location: Location, private dialog: MatDialog, private commentService: CommentService) {
+  constructor(private route: ActivatedRoute,
+    private cartService: CartService,
+    private tripService: TripService,
+    private _location: Location,
+    private dialog: MatDialog,
+    private commentService: CommentService,
+    private orderService: OrderService,
+    private authService: AuthService,
+    private spinner: SpinnerOverlayService) {
+
   }
 
   ngOnInit() {
-    let id = this.route.params.subscribe(
-      params => this.tripService.getProduct(params["id"]).subscribe(
-        trip => {
-          console.log(trip);
-          this.trip = trip;
-          this.commentService.getCommentsByTrip(trip._id).subscribe(
-            comments => {
-              this.comments = comments
-              console.log(this.comments)
-            }
-          )
-        },
-        error => console.log(error)
-      )
+    this.route.params.subscribe(
+      params => {
+        this.getTripData(params);
+        this.getUserOrderStatus();
+      }
     )
+  }
+
+  private getUserOrderStatus() {
+    this.authService.getCurrentUser().then(user => {
+      this.user = user;
+      this.orderService.getUserOrders(user._id).subscribe(orders => this.hasOrdered = orders.some(order => order.trip_id = this.trip._id))
+    }
+    )
+  }
+
+  private getTripData(params) {
+    this.spinner.show();
+    this.tripService.getProduct(params["id"]).subscribe(trip => {
+      console.log(trip);
+      this.trip = trip;
+      this.commentService.getCommentsByTrip(trip._id).subscribe(comments => {
+        this.comments = comments;
+        console.log(this.comments);
+        this.spinner.hide();
+      });
+    }, error => console.log(error));
   }
 
   goBack() {
@@ -51,11 +78,17 @@ export class TripDetailsComponent implements OnInit {
   }
 
   book() {
-    this.trip.seatsLeft -= 1;
+    if (this.trip.seatsLeft > 0) {
+      this.cartService.addProduct(this.trip)
+      this.trip.seatsLeft -= 1
+    }
   }
 
   unbook() {
-    this.trip.seatsLeft += 1;
+    if (this.trip.seatsLeft < this.trip.maxSeats) {
+      this.cartService.unbookProduct(this.trip)
+      this.trip.seatsLeft += 1
+    }
   }
 
   comment() {

@@ -23,10 +23,18 @@ export class CommentService {
     return this.httpClient.get<Comment>(`${this.apiUrl}/${_id}`);
   }
 
+  getTripCommentByUser(user_id: string, trip_id: string) {
+    return this.httpClient.get<Comment[]>(`${environment.backendUrl}/trips/${trip_id}/comments/user/${user_id}`);
+  }
+
+  getUserComments(user_id: string) {
+    return this.httpClient.get<Comment[]>(`${environment.backendUrl}/comments/user/${user_id}`);
+  }
+
   getCommentsByTrip(trip_id: string) {
     return this.httpClient.get<Comment[]>(`${environment.backendUrl}/trips/${trip_id}/comments`);
   }
-  
+
   addComment(comment: Comment, trip: Trip) {
     let trip_id = trip._id
     return this.httpClient.put<Comment>(`${environment.backendUrl}/trips/${trip_id}/comments`, comment);

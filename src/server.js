@@ -252,6 +252,14 @@ app.get('/comments', function (req, res) {
   })
 });
 
+app.get('/comments/user/:user_id', function (req, res) {
+  Comment.find({
+    user_id: req.params.user_id
+  }).then(function (comments) {
+    res.status(200).json(comments);
+  })
+});
+
 app.get('/comments/trip/:trip_id', function (req, res) {
   Comment.find({
     trip_id: req.params.trip_id

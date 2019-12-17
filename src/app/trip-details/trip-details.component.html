@@ -51,13 +51,11 @@
           <h4>Seats left: {{trip?.seatsLeft}}</h4>
           <div class="buttons">
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-dark" [disabled]="trip.seatsLeft <= 0" (click)="book()">
-                +
-              </button>
-              <button type="button" class="btn btn-dark" [disabled]="trip.seatsLeft >= trip.maxSeats"
-                (click)="unbook()">
-                -
-              </button>
+              <h4 class="text-danger" *ngIf="trip.seatsLeft == 0 && trip.cartCount == 0">Sold out!</h4>
+              <button [ngStyle]="{'visibility': trip?.seatsLeft > 0 ? 'visible' : 'hidden' }" class="btn btn-dark"
+                (click)="book()">+</button>
+              <button [ngStyle]="{'visibility': (trip?.cartCount > 0) ? 'visible' : 'hidden' }" class=" btn
+            btn-dark" (click)="unbook()">-</button>
             </div>
           </div>
         </div>
@@ -65,7 +63,7 @@
     </div>
     <div class="buttons d-flex flex-row justify-content-sm-between w-100 pl-4 pr-4">
       <button type="button" class="btn btn-success" (click)="comment()">
-        Review
+        {{hasOrdered ? "Change review" : "Review"}}
       </button>
       <button type="button" class="btn btn-danger" (click)="goBack()">
         Go back
@@ -84,11 +82,11 @@
             <div class="d-flex align-items-center flex-row rating pr-4 border-right">
               <h1>
                 <i class="fa fa-star">
-                </i>{{comment.rating}}</h1>
+                </i>{{comment?.rating}}</h1>
             </div>
             <div class="media-body ml-4">
-              <h5 class="mt-0">{{comment.userName}} wrote:</h5>
-              {{comment.text}}
+              <h5 class="mt-0">{{comment?.userName}} wrote:</h5>
+              {{comment?.text}}
             </div>
           </div>
         </div>
