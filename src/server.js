@@ -11,6 +11,7 @@ var connectionString = "mongodb+srv://thuleq:<password>@tripstest-2osto.mongodb.
 
 mongoose.connect(connectionString, {
   useNewUrlParser: true,
+  useFindAndModify: false,
   user: 'thuleq',
   pass: 'Ezkatka6'
 });
@@ -73,7 +74,7 @@ app.put('/trips/:trip_id/comments', function (req, res) {
   var patchBody = req.body
   patchBody.trip_id = req.params.trip_id
 
-  Comment.updateOne({
+  Comment.findOneAndUpdate({
     user_id: patchBody.user_id,
     trip_id: patchBody.trip_id
   }, patchBody, {
@@ -375,18 +376,7 @@ function cancelUpdateSeatCount(order) {
       }
     }
   )
-
 }
-
-// app.delete('/users/', function (req, res) {
-//   User.deleteMany({}, function (err) {
-//     if (err) throw err;
-//   })
-
-//   res.status(200).json({
-//     "message": "OK"
-//   });
-// });
 
 
 app.listen(5000);

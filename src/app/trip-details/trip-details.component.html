@@ -80,7 +80,10 @@
               </i>{{comment?.rating}}</h1>
           </div>
           <div class="media-body ml-4">
-            <h5 class="mt-0">{{comment?.userName}} wrote:</h5>
+            <div class="top d-flex flex-row justify-content-sm-between">
+              <h5 class="mt-0">{{comment?.userName}} wrote:</h5>
+              <h5>{{comment?.date | timeAgo | async}}</h5>
+            </div>
             {{comment?.text}}
           </div>
         </div>
@@ -88,7 +91,7 @@
     </div>
   </div>
   <button type="button" class="btn btn-dark" (click)="isCommentsCollapsed = !isCommentsCollapsed"
-    [attr.aria-expanded]="!isCommentsCollapsed" aria-controls="collapseExample">
+    [attr.aria-expanded]="!isCommentsCollapsed" [disabled]="comments.length == 0" aria-controls="collapseExample">
     {{isCommentsCollapsed ? "Show comments" : "Hide comments"}}
   </button>
 </div>

@@ -38,6 +38,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserFrameComponent } from './user-frame/user-frame.component';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { HistoryComponent } from './history/history.component';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { HistoryComponent } from './history/history.component';
     UserFrameComponent,
     AddCommentComponent,
     HistoryComponent,
+    TimeAgoPipe
   ],
   imports: [
     AppRoutingModule,

@@ -65,12 +65,18 @@ export class TripDetailsComponent implements OnInit {
     this.tripService.getProduct(params["id"]).subscribe(trip => {
       console.log(trip);
       this.trip = trip;
-      this.commentService.getCommentsByTrip(trip._id).subscribe(comments => {
-        this.comments = comments;
-        console.log(this.comments);
-        this.spinner.hide();
-      });
+      this.spinner.hide();
+      this.getComments(trip);
     }, error => console.log(error));
+  }
+
+  private getComments(trip: Trip) {
+    this.spinner.show();
+    this.commentService.getCommentsByTrip(trip._id).subscribe(comments => {
+      this.comments = comments;
+      console.log(this.comments);
+      this.spinner.hide();
+    });
   }
 
   goBack() {
@@ -105,7 +111,7 @@ export class TripDetailsComponent implements OnInit {
         console.log(data)
         this.commentService.addComment(data, this.trip).subscribe(
           data => {
-
+            this.getComments(this.trip)
           },
           err => {
             console.log(err)
