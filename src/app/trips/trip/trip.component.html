@@ -1,7 +1,7 @@
 <div class="card" style="width: 18rem;">
   <div class="card-header bg-light text-center">
-    <h3 class="card-title">{{tripData.name | uppercase}}</h3>
-    <h5 class="card-title">{{tripData.country | uppercase}} </h5>
+    <h3 class="card-title">{{tripData?.name | uppercase}}</h3>
+    <h5 class="card-title">{{tripData?.country | uppercase}} </h5>
 
   </div>
   <div class="row p-2">
@@ -11,13 +11,13 @@
     </div>
     <div class="col-md-6 d-flex flex-row">
       <div class="d-flex justify-content-start align-items-center">
-        <h3>{{tripData.price}}zł</h3>
+        <h3>{{tripData?.price}}zł</h3>
       </div>
     </div>
   </div>
   <div class="card-body">
     <div class="d-flex flex-row justify-content-sm-between">
-      <h5>{{tripData.startDate | date:'yyyy/MM/dd'}} - {{tripData.endDate | date:'yyyy/MM/dd'}}</h5>
+      <h5>{{tripData?.startDate | date:'yyyy/MM/dd'}} - {{tripData?.endDate | date:'yyyy/MM/dd'}}</h5>
     </div>
     <!-- <div class="card-text">{{tripData.description}}</div> -->
     <div class="mt-2 mb-2 d-flex flex-row align-items-center justify-content-sm-between">
@@ -27,16 +27,17 @@
     </div>
     <div class="d-flex flex-row justify-content-sm-between">
       <div class="row ml-1">
+        <h4 class="text-danger" *ngIf="tripData.seatsLeft == 0 && tripData.cartCount == 0">Sold out!</h4>
         <button [ngStyle]="{'visibility': tripData.seatsLeft > 0 ? 'visible' : 'hidden' }" class="btn btn-dark"
           (click)="book()">+</button>
-        <button [ngStyle]="{'visibility': (tripData.seatsLeft < tripData.maxSeats) ? 'visible' : 'hidden' }" class=" btn
+        <button [ngStyle]="{'visibility': (tripData.cartCount > 0) ? 'visible' : 'hidden' }" class=" btn
             btn-dark" (click)="unbook()">-</button>
       </div>
       <div>
-        <h4 *ngIf="tripData.seatsLeft > 3" class="text-success">{{tripData.seatsLeft}}</h4>
-        <h4 *ngIf="tripData.seatsLeft <= 3 && tripData.seatsLeft > 0" class="text-warning">{{tripData.seatsLeft}}
+        <h4 *ngIf="tripData.seatsLeft > 3" class="text-success">{{tripData?.seatsLeft}}</h4>
+        <h4 *ngIf="tripData.seatsLeft <= 3 && tripData.seatsLeft > 0" class="text-warning">{{tripData?.seatsLeft}}
         </h4>
-        <h4 *ngIf="tripData.seatsLeft == 0" class="text-danger">{{tripData.seatsLeft}}</h4>
+        <h4 *ngIf="tripData.seatsLeft == 0" class="text-danger">{{tripData?.seatsLeft}}</h4>
       </div>
     </div>
     <!-- <div class="mt-2 d-flex flex-row justify-content-center">

@@ -3,6 +3,7 @@ import { EventEmitter, Output } from '@angular/core';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { filter } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-filter',
@@ -16,7 +17,12 @@ export class FilterComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  //TODO: Fix filters
+  getStringFromDate(date: Date, format: string) {
+    let pipe = new DatePipe('en-US')
+    let stringDate = pipe.transform(date, format);
+    console.log(stringDate)
+    return stringDate
+  }
 
   ngOnInit() {
     this.filterForm = this.fb.group({
@@ -28,6 +34,12 @@ export class FilterComponent implements OnInit {
       ratingMax: new FormControl(''),
       destination: new FormControl('')
     });
+
+    let currentDate = this.getStringFromDate(new Date()
+      , 'yyyy-MM-dd')
+    this.filterForm.controls['dateMin'].setValue(currentDate)
+    this.filterForm.controls['priceMin'].setValue(0)
+    this.filterForm.controls['ratingMin'].setValue(0)
 
     this.onChanges();
   }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
-import { Trip, Currency } from '../models/trip.model';
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { CurrencyService } from '../services/currency.service';
-import { CurrencyPipe } from '@angular/common';
+import { Trip } from '../models/trip.model';
+import { AuthService } from '../services/auth.service';
+import { AppUser } from '../models/user.model';
+import { OrderService } from '../services/order.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,10 +13,14 @@ import { CurrencyPipe } from '@angular/common';
 export class CartComponent implements OnInit {
 
   products: Trip[] = []
+  user: AppUser;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private authService: AuthService, private orderService: OrderService) { }
 
   ngOnInit() {
+    this.authService.getCurrentUser().then(
+      user => this.user = user
+    )
     this.products = this.cartService.getCartProducts()
     console.log(this.products)
   }
@@ -42,6 +46,27 @@ export class CartComponent implements OnInit {
     if (product.cartCount == 0) {
       this.cartService.deleteProduct(product)
     }
+  }
+
+  checkout() {
+    let user_id = this.user._id
+
+    let orders = this.products.map(function (product) {
+      return {
+        trip_id: product._id,
+        user_id: user_id,
+        count: product.cartCount,
+        totalPrice: product.price * product.cartCount,
+        date: new Date()
+      }
+    })
+
+    this.orderService.order(orders).subscribe(
+      data => {
+        console.log(data)
+        this.products = []
+      }
+    )
   }
 
 }

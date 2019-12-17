@@ -31,7 +31,7 @@
               btn-dark" (click)="dec(product)">-</button>
       </div>
       <div class="p-4">
-        <button type="button" (click)="delete(product)" class="btn btn-dark">
+        <button type="button" (click)="delete(product)" class="btn btn-danger">
           Delete
         </button>
       </div>
@@ -39,7 +39,7 @@
     <div class="card-footer">
       <div class="d-flex flex-row justify-content-sm-between align-items-start">
         <h4>Total price: {{ totalPrice() }} zł</h4>
-        <button routerLink="" routerLinkActive="active" class="btn btn-dark">Checkout</button>
+        <button (click)="checkout()" class="btn btn-success">Checkout</button>
       </div>
     </div>
   </div>

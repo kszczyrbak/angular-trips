@@ -34,6 +34,14 @@ const Trip = mongoose.model('Trip', {
   photo: String
 });
 
+const Order = mongoose.model('Order', {
+  trip_id: String,
+  user_id: String,
+  count: Number,
+  totalPrice: Number,
+  date: Date
+})
+
 const Comment = mongoose.model('Comment', {
   trip_id: String,
   user_id: String,
@@ -266,6 +274,101 @@ app.delete('/comments/:id', function (req, res) {
     });
   })
 });
+
+app.post('/orders/', function (req, res) {
+  var orders = req.body;
+
+  Order.collection.insertMany(orders, function (err, docs) {
+    if (err) {
+      res.status(400).json({
+        "message": err
+      })
+    } else {
+      res.status(200).json(docs)
+      for (order of orders) {
+        checkoutUpdateSeatCount(order)
+      }
+    }
+  });
+})
+
+app.delete('/orders/:order_id', function (req, res) {
+  Order.findOneAndDelete({
+    _id: req.params.order_id
+  }, function (err, order) {
+    if (err) {
+      res.status(400).json({
+        "message": err
+      })
+    };
+    res.status(200).json({
+      "message": "OK"
+    });
+    cancelUpdateSeatCount(order)
+  })
+})
+
+app.get('/orders/user/:user_id',
+  function (req, res) {
+    Order.find({
+      user_id: req.params.user_id
+    }).then(function (orders) {
+      res.status(200).json(orders);
+    })
+  }
+)
+
+function checkoutUpdateSeatCount(order) {
+  Trip.updateOne({
+    _id: order.trip_id
+  }, {
+    "$inc": {
+      seatsLeft: -order.count
+    }
+  }).then(
+    function (trip) {
+      console.log(trip)
+    }
+  )
+  Trip.updateOne({
+    _id: order.trip_id,
+    seatsLeft: {
+      "$lt": 0
+    }
+  }, {
+    seatsLeft: 0
+  }).then(
+    function (trip) {
+      console.log(trip)
+    }
+  )
+}
+
+function cancelUpdateSeatCount(order) {
+  Trip.updateOne({
+    _id: order.trip_id
+  }, {
+    "$inc": {
+      seatsLeft: order.count
+    }
+  }).then(
+    function (trip) {
+      if (trip.seatsLeft > trip.maxSeats) {
+        trip.seatsLeft = trip.maxSeats
+        delete trip._id
+        Trip.updateOne({
+            _id: order.trip_id
+          },
+          trip).then(
+          function (trip) {
+            console.log(trip)
+          }
+        )
+      }
+    }
+  )
+
+}
 
 // app.delete('/users/', function (req, res) {
 //   User.deleteMany({}, function (err) {

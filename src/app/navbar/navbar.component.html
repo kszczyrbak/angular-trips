@@ -6,19 +6,20 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="btn btn-light" routerLink="cart" routerLinkActive="active">
-          <i class="fa fa-shopping-cart mr-1"></i>Cart
-          <span class="badge badge-dark">{{cartCount}}</span>
-        </a>
-      </li>
-      <li class="nav-item active ml-4" *ngIf="isAdmin">
-        <a class="btn btn-success" routerLink="admin" routerLinkActive="active">Admin</a>
-      </li>
-      <li class="nav-item active ml-4 clickable">
-        <a class="btn btn-danger" routerLinkActive="active" (click)="logout()" routerLinkActive="active">Logout</a>
-      </li>
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-success" id="dropdownBasic1" ngbDropdownToggle>{{currentUser?.name}}</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem routerLink="cart">
+            Cart
+            <span class="badge badge-secondary">{{cartCount}}</span>
+            </button>
+            <button ngbDropdownItem routerLink="history">Order history</button>
+            <button ngbDropdownItem routerLink="admin" *ngIf="isAdmin">Admin panel</button>
+            <button ngbDropdownItem class="text-danger border-top" (click)="logout()">Logout</button>
+          </div>
+        </div>
+      </div>
     </ul>
-    <app-user-frame [userData]="currentUser" class="ml-4" *ngIf="currentUser"></app-user-frame>
   </div>
 </nav>

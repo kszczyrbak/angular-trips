@@ -21,6 +21,8 @@ export class TripDetailsComponent implements OnInit {
 
   comments: Comment[] = []
 
+  hasOrdered: boolean = false;
+
   public isCommentsCollapsed = true;
 
   constructor(private route: ActivatedRoute, private tripService: TripService, private _location: Location, private dialog: MatDialog, private commentService: CommentService) {

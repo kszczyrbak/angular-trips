@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminGuard } from './services/admin-guard';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
             { path: '', redirectTo: 'trips', pathMatch: 'full' },
             { path: 'trips', component: TripsComponent },
             { path: 'cart', component: CartComponent },
+            { path: 'history', component: HistoryComponent },
             { path: 'trip/:id', component: TripDetailsComponent },
             { path: 'user/:id', component: UserDetailsComponent },
             {

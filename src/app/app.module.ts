@@ -37,8 +37,7 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserFrameComponent } from './user-frame/user-frame.component';
 import { AddCommentComponent } from './add-comment/add-comment.component';
-
-//TODO: Rating functionality, probably a rating service
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +62,7 @@ import { AddCommentComponent } from './add-comment/add-comment.component';
     UserDetailsComponent,
     UserFrameComponent,
     AddCommentComponent,
+    HistoryComponent,
   ],
   imports: [
     AppRoutingModule,
