@@ -70,27 +70,25 @@
       </button>
     </div>
   </div>
-  <button type="button" class="btn btn-dark" (click)="isCommentsCollapsed = !isCommentsCollapsed"
-    [attr.aria-expanded]="!isCommentsCollapsed" aria-controls="collapseExample">
-    Comments
-  </button>
   <div id="comments" [ngbCollapse]="isCommentsCollapsed">
-    <div class="mt-4">
-      <div class="card" *ngFor="let comment of comments">
-        <div class="card-body">
-          <div class="media p-2">
-            <div class="d-flex align-items-center flex-row rating pr-4 border-right">
-              <h1>
-                <i class="fa fa-star">
-                </i>{{comment?.rating}}</h1>
-            </div>
-            <div class="media-body ml-4">
-              <h5 class="mt-0">{{comment?.userName}} wrote:</h5>
-              {{comment?.text}}
-            </div>
+    <div class="card box-shadow" *ngFor="let comment of comments">
+      <div class="card-body">
+        <div class="media p-2">
+          <div class="d-flex align-items-center flex-row rating pr-4 border-right">
+            <h1>
+              <i class="fa fa-star">
+              </i>{{comment?.rating}}</h1>
+          </div>
+          <div class="media-body ml-4">
+            <h5 class="mt-0">{{comment?.userName}} wrote:</h5>
+            {{comment?.text}}
           </div>
         </div>
       </div>
     </div>
   </div>
+  <button type="button" class="btn btn-dark" (click)="isCommentsCollapsed = !isCommentsCollapsed"
+    [attr.aria-expanded]="!isCommentsCollapsed" aria-controls="collapseExample">
+    {{isCommentsCollapsed ? "Show comments" : "Hide comments"}}
+  </button>
 </div>
