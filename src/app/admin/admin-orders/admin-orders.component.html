@@ -26,7 +26,7 @@
           <td class="align-middle">{{ order?.count }} </td>
           <td class="align-middle">{{ order?.totalPrice }}</td>
           <td class="vert-aligned">
-            <button class="btn btn-danger btn-sm" [disabled]="order.date - currentDate > 5" (click)="cancel(order)">
+            <button class="btn btn-danger btn-sm" (click)="cancel(order)">
               Cancel
             </button>
           </td>

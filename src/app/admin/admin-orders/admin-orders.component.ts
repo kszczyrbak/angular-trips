@@ -10,6 +10,7 @@ import { OrderService } from 'src/app/services/order.service';
 export class AdminOrdersComponent implements OnInit {
 
   orders: Order[] = [];
+  currentDate = new Date();
 
   constructor(private orderService: OrderService) { }
 
@@ -17,6 +18,10 @@ export class AdminOrdersComponent implements OnInit {
     this.orderService.getOrders().subscribe(
       orders => this.orders = orders
     )
+  }
+
+  cancel(order: Order) {
+    this.orderService.deleteOrder(order)
   }
 
 }

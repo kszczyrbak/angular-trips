@@ -1,4 +1,4 @@
 <div class="img-circle avatar border box-shadow" [routerLink]="['/app/user', userData._id]" [style.width]="stringSize"
   [style.height]="stringSize" [style.line-height]="stringSize" [style.font-size]="fontSize">
-  <span [style.color]='white' *ngIf="initials">{{initials}}</span>
+  <span *ngIf="initials">{{initials}}</span>
 </div>
