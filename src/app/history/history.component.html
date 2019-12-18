@@ -15,13 +15,13 @@
       <tbody>
         <tr *ngFor="let order of orders" class="hoverable">
           <td class="align-middle" scope="row">
-            <a>{{order._id}}</a></td>
+            <a>{{order?._id}}</a></td>
           <td class="align-middle">
-            <a [routerLink]="['/app/trip', order.trip_id]">{{ order.trip_id }}</a>
+            <a [routerLink]="['/app/trip', order.trip_id]">{{ order?.trip_id }}</a>
           </td>
-          <td class="align-middle">{{ order.date | timeAgo | async }}</td>
-          <td class="align-middle">{{ order.count }} </td>
-          <td class="align-middle">{{ order.totalPrice }}</td>
+          <td class="align-middle">{{ order?.date | timeAgo}}</td>
+          <td class="align-middle">{{ order?.count }} </td>
+          <td class="align-middle">{{ order?.totalPrice }}</td>
           <td class="vert-aligned">
             <button class="btn btn-danger btn-sm" [disabled]="order.date - currentDate > 5" (click)="cancel(order)">
               Cancel
