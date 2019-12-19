@@ -6,10 +6,10 @@
   </div>
   <div class="pt-4 mt-4" *ngIf="products.length > 0">
     <div *ngFor="let product of products"
-      class="border box-shadow mb-4 d-flex flex-row align-items-center justify-content-sm-between">
-      <div class="col-2 p-4 text-center">
-        <img class="img-responsive" [src]="product.photo" width="120" height="80" />
-      </div>
+      class="border box-shadow p-4 mb-4 d-flex flex-row align-items-center justify-content-sm-between">
+      <!-- <div class="col-2 p-4 text-center">
+        <img class="img-responsive" [src]="product.photo[0]" (error)="width="120" height="80" />
+      </div> -->
       <div class="text-md-left col">
         <h2 class="product-name">
           <strong>{{ product?.name }}</strong>
