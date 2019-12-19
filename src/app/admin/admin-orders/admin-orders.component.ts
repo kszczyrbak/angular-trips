@@ -21,7 +21,12 @@ export class AdminOrdersComponent implements OnInit {
   }
 
   cancel(order: Order) {
-    this.orderService.deleteOrder(order)
+    this.orderService.deleteOrder(order).subscribe(
+      res => {
+        console.log(res)
+        this.getUserOrders(this.currentUser);
+      }
+    )
   }
 
 }
