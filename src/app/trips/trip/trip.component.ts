@@ -22,6 +22,10 @@ export class TripComponent implements OnInit {
     console.log(this.mainPhotoUrl)
   }
 
+  placeholder($event) {
+    this.mainPhotoUrl = "assets/placeholder.jpg"
+  }
+
   removeProduct() {
     this.removeEvent.emit(this.tripData)
   }

@@ -43,7 +43,10 @@ export class TripDetailsComponent implements OnInit {
     private orderService: OrderService,
     private authService: AuthService,
     private spinner: SpinnerOverlayService) {
+  }
 
+  placeholder($event) {
+    this.photos = ["assets/placeholder.jpg"]
   }
 
   ngOnInit() {

@@ -18,7 +18,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     {
         path: 'app', component: HomeComponent, canActivate: [AuthGuard], children: [
-            { path: '', redirectTo: 'trips', pathMatch: 'full' },
+            { path: '', redirectTo: '/app/trips', pathMatch: 'full' },
             { path: 'trips', component: TripsComponent },
             { path: 'cart', component: CartComponent },
             { path: 'history', component: HistoryComponent },

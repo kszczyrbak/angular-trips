@@ -12,16 +12,16 @@
       </div>
       <div class="text-md-left col">
         <h2 class="product-name">
-          <strong>{{ product.name }}</strong>
+          <strong>{{ product?.name }}</strong>
         </h2>
         <h2>
-          <small>{{ product.country }}</small>
+          <small>{{ product?.country }}</small>
         </h2>
       </div>
       <div class="d-flex flex-column p-4">
         <div class="">
           <h3>
-            <strong>{{product.cartCount}} x {{ product.price }} zł = {{product.price * product.cartCount}} zł</strong>
+            {{product?.cartCount}} x {{ product?.price }} zł = {{product?.price * product?.cartCount}} zł
           </h3>
         </div>
       </div>
