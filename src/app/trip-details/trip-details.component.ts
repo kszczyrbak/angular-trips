@@ -47,6 +47,7 @@ export class TripDetailsComponent implements OnInit {
 
   placeholder($event) {
     this.photos = ["assets/placeholder.jpg"]
+    console.log(this.photos)
   }
 
   ngOnInit() {

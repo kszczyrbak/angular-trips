@@ -2,6 +2,7 @@
   "name": "wycieczki",
   "version": "0.0.0",
   "scripts": {
+    "deploy": "ng build --prod --base-href=\"https://kszczyrbak.github.io/projekt-webowe/\" && ngh --dir=dist/wycieczki",
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build",
