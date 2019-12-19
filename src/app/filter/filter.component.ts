@@ -32,16 +32,18 @@ export class FilterComponent implements OnInit {
       dateMax: new FormControl(''),
       ratingMin: new FormControl(''),
       ratingMax: new FormControl(''),
+      seatsLeft: new FormControl(''),
       destination: new FormControl('')
     });
 
     let currentDate = this.getStringFromDate(new Date()
       , 'yyyy-MM-dd')
+
+
+    this.onChanges();
     this.filterForm.controls['dateMin'].setValue(currentDate)
     this.filterForm.controls['priceMin'].setValue(0)
     this.filterForm.controls['ratingMin'].setValue(0)
-
-    this.onChanges();
   }
 
 
@@ -50,8 +52,9 @@ export class FilterComponent implements OnInit {
     this.filterForm.valueChanges.subscribe(
       filterObj => {
         Object.keys(filterObj).forEach(key =>
-          filterObj[key] === '' ? delete filterObj[key] : key
+          filterObj[key] === '' || filterObj[key] === null ? delete filterObj[key] : key
         );
+        console.log(filterObj)
         this.filterChange.emit(filterObj);
       }
     )

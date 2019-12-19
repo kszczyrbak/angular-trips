@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AppUser } from '../models/user.model';
 import { map } from 'rxjs/operators'
+import { SpinnerOverlayService } from '../spinner/spinner-overlay.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
+  constructor(private authService: AuthService, private router: Router, private userService: UserService, private spinner: SpinnerOverlayService) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -44,14 +45,22 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    this.spinner.show();
     this.authService.register({ email: this.f.email.value, password: this.f.password.value }).then(
       (user) => {
         let { password, confirmPassword, ...userData } = this.registerForm.value;
         userData.role = "USER";
         this.userService.addUser(userData).subscribe(
-          data => console.log(data)
+          data => {
+            this.spinner.hide();
+            this.router.navigateByUrl('/app')
+            console.log(data)
+          },
+          err => {
+            this.spinner.hide();
+          }
         )
-        this.router.navigateByUrl('/app')
+
       }
     )
   }

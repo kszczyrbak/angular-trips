@@ -8,15 +8,22 @@ export class FilterPipe implements PipeTransform {
 
   transform(products: Trip[], filters: any): Trip[] {
     return products.filter(trip => {
-      if (this.filterPrice(trip, filters) && this.filterDate(trip, filters) && this.filterRating(trip, filters) && this.filterProperties(trip, filters))
+      if (this.filterPrice(trip, filters) && this.filterSeats(trip, filters) && this.filterDate(trip, filters) && this.filterRating(trip, filters) && this.filterProperties(trip, filters))
         return true;
       else
         return false;
     });
   }
 
+  filterSeats(product: Trip, filters: any) {
+    let val = (filters['seatsLeft'] != null ? (product.seatsLeft > filters['seatsLeft']) : true);
+    console.log(val)
+    return val;
+  }
+
   filterPrice(product: Trip, filters: any) {
     let val = (filters['priceMin'] != null ? (product.price > filters['priceMin']) : true) && (filters['priceMax'] != null ? (product.price < filters['priceMax']) : true);
+    console.log(val)
     return val;
   }
 

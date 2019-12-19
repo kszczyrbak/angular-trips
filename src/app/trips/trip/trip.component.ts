@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Trip } from 'src/app/models/trip.model';
 import { CartService } from 'src/app/services/cart.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-trip',
@@ -12,9 +13,13 @@ export class TripComponent implements OnInit {
   @Input() tripData: Trip
   @Output() removeEvent = new EventEmitter<Trip>()
 
+  mainPhotoUrl: string;
+
   constructor(private cartService: CartService) { }
 
   ngOnInit() {
+    this.mainPhotoUrl = `${environment.backendUrl}/${this.tripData.photos[0]}`
+    console.log(this.mainPhotoUrl)
   }
 
   removeProduct() {

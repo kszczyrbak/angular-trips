@@ -39,7 +39,10 @@ import { UserFrameComponent } from './user-frame/user-frame.component';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { HistoryComponent } from './history/history.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import {TimeAgoPipe} from 'time-ago-pipe';
+import { TimeAgoPipe } from 'time-ago-pipe';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { FileUploadService } from './services/file-upload.service';
+
 
 @NgModule({
   declarations: [
@@ -66,7 +69,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
     AddCommentComponent,
     HistoryComponent,
     AdminOrdersComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
   ],
   imports: [
     AppRoutingModule,
@@ -80,14 +83,14 @@ import {TimeAgoPipe} from 'time-ago-pipe';
     MatSidenavModule,
     HttpClientModule,
     NgbModule,
-    // HttpClientInMemoryWebApiModule.forRoot(InMemoryTripService),
+    NgxFileDropModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [FiredbService, AuthService],
+  providers: [FiredbService, AuthService, FileUploadService],
   bootstrap: [AppComponent],
   entryComponents: [AddTripComponent, SpinnerOverlayComponent, AddCommentComponent]
 })

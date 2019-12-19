@@ -75,6 +75,39 @@
     <textarea type="text" class="form-control" rows="5" formControlName="description"></textarea>
   </div>
 
+  <div class="wrapper">
+    <div class="text-center">
+      <h5>Upload images</h5>
+
+      <ngx-file-drop contentClassName="drop-content p-2" dropZoneClassName="drop-zone" (onFileDrop)="dropped($event)"
+        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" multiple="true">
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+          <button class="btn btn-primary"
+            (click)="openFileSelector()">{{files.length > 0 ? "Add files" : "Choose files"}}</button>
+        </ng-template>
+      </ngx-file-drop>
+    </div>
+    <div class="upload-table" *ngIf="files.length > 0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Filename</th>
+          </tr>
+        </thead>
+        <tbody class="upload-name-style">
+          <tr *ngFor="let item of files">
+            <td>
+              <div class="d-flex flex-row justify-content-sm-between align-items-center">{{ item?.relativePath }}
+                <button class="btn btn-danger btn-sm" (click)="remove(item)">X</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
   <div class="d-flex flex-row justify-content-sm-between">
     <button type="submit" class="btn btn-dark" [disabled]="!addTripForm.valid" (click)="submit()">
       Submit

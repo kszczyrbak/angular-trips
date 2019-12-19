@@ -15,7 +15,7 @@ export interface Trip {
   seatsLeft: number;
   maxSeats: number;
   description?: string;
-  photo?: string;
+  photos?: string[];
   rating?: number;
   cartCount?: number;
 }

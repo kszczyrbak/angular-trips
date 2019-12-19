@@ -5,6 +5,8 @@ import { SpinnerOverlayService } from 'src/app/spinner/spinner-overlay.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddTripComponent } from 'src/app/add-trip/add-trip.component';
 import { photoPlaceholder } from 'src/assets/fake-dane';
+import { DatePipe } from '@angular/common';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 
 @Component({
   selector: 'app-admin-trips',
@@ -15,7 +17,7 @@ export class AdminTripsComponent implements OnInit {
 
   trips: Trip[]
 
-  constructor(private tripService: TripService, private spinnerService: SpinnerOverlayService, private dialog: MatDialog) { }
+  constructor(private tripService: TripService, private spinnerService: SpinnerOverlayService, private dialog: MatDialog, private fileUpload: FileUploadService) { }
 
   ngOnInit() {
     this.getTrips();
@@ -43,8 +45,9 @@ export class AdminTripsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
+    dialogConfig.autoFocus = false;
     dialogConfig.data = trip
+
 
     const dialogRef = this.dialog.open(AddTripComponent, dialogConfig);
 
@@ -53,6 +56,8 @@ export class AdminTripsComponent implements OnInit {
         data._id = trip._id
         this.tripService.editProduct(data).subscribe(
           data => {
+            let filenames = this.fileUpload.upload(trip._id)
+            console.log(filenames)
             this.getTrips();
           },
           err => {
@@ -68,16 +73,17 @@ export class AdminTripsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
+    dialogConfig.autoFocus = false;
 
     const dialogRef = this.dialog.open(AddTripComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(data => {
       if (data != undefined) {
-        // data._id = this.getMaxId();
-        data.photo = photoPlaceholder;
         this.tripService.addProduct(data).subscribe(
           data => {
+            let filenames = this.fileUpload.upload(data._id)
+            console.log(filenames)
+
             this.getTrips();
             // this.toastr.success('Successfully added a trip!', 'Success!')
           },

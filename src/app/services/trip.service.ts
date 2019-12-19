@@ -4,6 +4,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,9 @@ export class TripService {
   }
 
   addProduct(product: Trip) {
-    if (!product.photo)
-      product.photo = 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
     product.seatsLeft = product.maxSeats
     product.rating = 0
+    product.photos = []
     return this.httpClient.post<Trip>(this.apiUrl, product);
   }
 

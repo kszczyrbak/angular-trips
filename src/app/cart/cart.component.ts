@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { CartService } from '../services/cart.service';
 import { Trip } from '../models/trip.model';
 import { AuthService } from '../services/auth.service';
@@ -15,7 +16,7 @@ export class CartComponent implements OnInit {
   products: Trip[] = []
   user: AppUser;
 
-  constructor(private cartService: CartService, private authService: AuthService, private orderService: OrderService) { }
+  constructor(private cartService: CartService, private authService: AuthService, private orderService: OrderService, private _location: Location) { }
 
   ngOnInit() {
     this.authService.getCurrentUser().then(
@@ -46,6 +47,10 @@ export class CartComponent implements OnInit {
     if (product.cartCount == 0) {
       this.cartService.deleteProduct(product)
     }
+  }
+
+  goBack() {
+    this._location.back();
   }
 
   checkout() {

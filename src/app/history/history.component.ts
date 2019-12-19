@@ -19,6 +19,7 @@ export class HistoryComponent implements OnInit {
   constructor(private authService: AuthService, private orderService: OrderService, private spinner: SpinnerOverlayService) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.authService.getCurrentUser().then(
       user => {
         this.currentUser = user;
@@ -28,7 +29,7 @@ export class HistoryComponent implements OnInit {
   }
 
   private getUserOrders(user: AppUser) {
-    this.spinner.show();
+
     this.orderService.getUserOrders(user._id).subscribe(orders => {
       console.log(orders);
       this.orders = orders;

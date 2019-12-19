@@ -3,6 +3,8 @@ import { Trip, Currency } from '../models/trip.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DatePipe } from '@angular/common';
+import { NgxFileDropEntry } from 'ngx-file-drop';
+import { FileUploadService } from '../services/file-upload.service';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class AddTripComponent implements OnInit {
 
   currentDate = this.getStringFromDate(new Date(), "yyyy-MM-dd")
 
-  constructor(private dialogRef: MatDialogRef<AddTripComponent>, @Inject(MAT_DIALOG_DATA) public data: Trip) { }
+  constructor(private dialogRef: MatDialogRef<AddTripComponent>, @Inject(MAT_DIALOG_DATA) public data: Trip, private fileUpload: FileUploadService) { }
 
   get name() {
     return this.addTripForm.get('name')
@@ -58,11 +60,36 @@ export class AddTripComponent implements OnInit {
 
     if (this.data) {
       this.addTripForm.patchValue(this.data)
+      this.addTripForm.controls['startDate'].setValue(this.getStringFromDate(new Date(this.data.startDate), 'yyyy-MM-dd'))
+      this.addTripForm.controls['endDate'].setValue(this.getStringFromDate(new Date(this.data.endDate), 'yyyy-MM-dd'))
     }
   }
 
   submit() {
+    this.fileUpload.setFiles(this.files)
     this.dialogRef.close(this.addTripForm.value);
   }
+
+  files: NgxFileDropEntry[] = [];
+
+  dropped(files: NgxFileDropEntry[]) {
+    this.files = this.files.concat(files)
+  }
+
+  fileOver(event) {
+    console.log(event);
+  }
+
+  fileLeave(event) {
+    console.log(event);
+  }
+
+  remove(file: NgxFileDropEntry) {
+    let index = this.files.indexOf(file)
+    if (index > -1) {
+      this.files.splice(index, 1);
+    }
+  }
+
 
 }

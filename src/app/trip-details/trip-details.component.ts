@@ -13,6 +13,7 @@ import { OrderService } from '../services/order.service';
 import { SpinnerOverlayService } from '../spinner/spinner-overlay.service';
 import { CartService } from '../services/cart.service';
 import { AppUser } from '../models/user.model';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -26,6 +27,8 @@ export class TripDetailsComponent implements OnInit {
 
   comments: Comment[] = []
   user: AppUser;
+
+  photos: String[]
 
   hasOrdered: boolean = false;
 
@@ -65,6 +68,7 @@ export class TripDetailsComponent implements OnInit {
     this.tripService.getProduct(params["id"]).subscribe(trip => {
       console.log(trip);
       this.trip = trip;
+      this.photos = trip.photos.map(photo => `${environment.backendUrl}/${photo}`)
       this.spinner.hide();
       this.getComments(trip);
     }, error => console.log(error));
