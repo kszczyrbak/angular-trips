@@ -15,16 +15,17 @@ export class AdminOrdersComponent implements OnInit {
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
-    this.orderService.getOrders().subscribe(
-      orders => this.orders = orders
-    )
+    this.getOrders();
+  }
+
+  private getOrders() {
+    this.orderService.getOrders().subscribe(orders => this.orders = orders);
   }
 
   cancel(order: Order) {
     this.orderService.deleteOrder(order).subscribe(
       res => {
-        console.log(res)
-        this.getUserOrders(this.currentUser);
+        this.getOrders()
       }
     )
   }
