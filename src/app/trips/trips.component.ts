@@ -10,6 +10,7 @@ import { photoPlaceholder } from 'src/assets/fake-dane';
 import { UserService } from '../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { SpinnerOverlayService } from '../spinner/spinner-overlay.service';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-trips',
@@ -22,10 +23,12 @@ export class TripsComponent implements OnInit {
 
   filterObj: any = {};
 
+  cartCount: number = 0;
+
   products: Trip[] = [
   ]
 
-  constructor(private tripService: TripService, private dialog: MatDialog, private currencyService: CurrencyService, private userService: UserService, private spinnerService: SpinnerOverlayService) {
+  constructor(private tripService: TripService, private cartService: CartService, private dialog: MatDialog, private currencyService: CurrencyService, private userService: UserService, private spinnerService: SpinnerOverlayService) {
   }
 
   getBorderClass(product: Trip) {
@@ -63,6 +66,9 @@ export class TripsComponent implements OnInit {
 
   ngOnInit() {
     this.getTrips();
+    this.cartService.cartCount$.subscribe(
+      count => this.cartCount = count
+    )
   }
 
   removeProduct(product: Trip) {
