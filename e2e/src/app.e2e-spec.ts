@@ -1,17 +1,24 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
+import { O_TRUNC } from 'constants';
 
-describe('workspace-project App', () => {
+describe('whole app', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
+    page.navigateTo();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('wycieczki app is running!');
+  it('should display title', () => {
+    expect(page.getTitle()).toEqual('Wycieczki');
   });
+
+  it('should redirect to login', () => {
+    browser.getCurrentUrl().then(
+      url => expect(url).toContain('login')
+    )
+  })
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
