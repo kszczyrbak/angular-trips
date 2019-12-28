@@ -29,6 +29,22 @@ export class RegisterComponent implements OnInit {
     );
   }
 
+  get email() {
+    return this.registerForm.get('email')
+  }
+
+  get password() {
+    return this.registerForm.get('password')
+  }
+
+  get name() {
+    return this.registerForm.get('name')
+  }
+
+  get confirmPassword() {
+    return this.registerForm.get('confirmPassword')
+  }
+
   mustMatch(group: FormGroup) {
     let val = group.get('password').value;
     let matchVal = group.get('confirmPassword').value;
