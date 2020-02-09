@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddTripComponent } from './add-trip.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { MatDialogModule } from '@angular/material';
+import { AddTripTestModule } from './add-trip.test.module';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('AddTripComponent', () => {
   let component: AddTripComponent;
@@ -8,7 +13,10 @@ describe('AddTripComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddTripComponent ]
+      declarations: [ ],
+      imports: [
+        AddTripTestModule,
+      ]
     })
     .compileComponents();
   }));

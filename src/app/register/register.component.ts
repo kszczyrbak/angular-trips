@@ -62,21 +62,26 @@ export class RegisterComponent implements OnInit {
     }
 
     this.spinner.show();
-    this.authService.register({ email: this.f.email.value, password: this.f.password.value }).then(
-      (user) => {
+    this.authService.register({ email: this.f.email.value, password: this.f.password.value }).subscribe(
+      data => {
+        console.log("Adding user")
         let { password, confirmPassword, ...userData } = this.registerForm.value;
         userData.role = "USER";
         this.userService.addUser(userData).subscribe(
           data => {
             this.spinner.hide();
             this.router.navigateByUrl('/app')
-            console.log(data)
+            console.log("ADDED USER", data)
           },
           err => {
+            console.log(err)
             this.spinner.hide();
           }
         )
 
+      },
+      err => {
+        console.log(err)
       }
     )
   }

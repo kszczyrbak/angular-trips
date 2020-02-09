@@ -62,7 +62,7 @@ export class CartComponent implements OnInit {
         user_id: user_id,
         count: product.cartCount,
         totalPrice: product.price * product.cartCount,
-        date: new Date()
+        date: Date()
       }
     })
 
@@ -70,7 +70,8 @@ export class CartComponent implements OnInit {
       data => {
         console.log(data)
         this.products = []
-      }
+      },
+      err => console.log(err)
     )
   }
 

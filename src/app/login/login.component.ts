@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      email: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', Validators.required)
     });
   }
@@ -45,15 +45,17 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+
     this.spinnerService.show();
     this.authService.login(this.loginForm.value)
-      .then((credentials) => {
-        this.spinnerService.hide();
-        this.router.navigateByUrl('/app');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+      .subscribe(
+        (credentials) => {
+          this.spinnerService.hide();
+          this.router.navigateByUrl('/app');
+        },
+        error => {
+          console.log(error);
+        })
 
+  }
 }

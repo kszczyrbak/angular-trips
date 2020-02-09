@@ -60,7 +60,10 @@ export class TripsComponent implements OnInit {
         this.products = this.sortTrips(products)
         this.spinnerService.hide();
       },
-      error => console.log(error)
+      error => {
+        this.spinnerService.hide();
+        console.log(error)
+      }
     )
   }
 

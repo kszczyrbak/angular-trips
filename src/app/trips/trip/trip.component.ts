@@ -18,8 +18,10 @@ export class TripComponent implements OnInit {
   constructor(private cartService: CartService) { }
 
   ngOnInit() {
-    this.mainPhotoUrl = `${environment.backendUrl}/${this.tripData.photos[0]}`
-    console.log(this.mainPhotoUrl)
+    if (this.tripData) {
+      this.mainPhotoUrl = `${environment.backendUrl}/${this.tripData.photos[0]}`
+      console.log(this.mainPhotoUrl)
+    }
   }
 
   placeholder($event) {

@@ -24,9 +24,11 @@ export class NavbarComponent implements OnInit {
     )
     this.authService.getCurrentUser().then(
       user => {
-        console.log(user)
-        this.currentUser = user;
-        this.isAdmin = (this.currentUser.role == SecurityRole.ADMIN)
+        if(user){
+          console.log(user)
+          this.currentUser = user;
+          this.isAdmin = (this.currentUser.role == SecurityRole.ADMIN)
+        }
       }
     )
   }

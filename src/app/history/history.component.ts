@@ -22,8 +22,10 @@ export class HistoryComponent implements OnInit {
     this.spinner.show();
     this.authService.getCurrentUser().then(
       user => {
-        this.currentUser = user;
-        this.getUserOrders(user);
+        if (user) {
+          this.currentUser = user;
+          this.getUserOrders(user);
+        }
       }
     )
   }
@@ -43,7 +45,8 @@ export class HistoryComponent implements OnInit {
       res => {
         console.log(res)
         this.getUserOrders(this.currentUser);
-      }
+      },
+      err => console.log(err)
     )
   }
 

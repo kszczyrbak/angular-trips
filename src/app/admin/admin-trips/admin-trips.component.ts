@@ -23,7 +23,7 @@ export class AdminTripsComponent implements OnInit {
     this.getTrips();
   }
 
-  private getTrips() {
+  getTrips() {
     this.spinnerService.show();
     this.tripService.getProducts().subscribe(trips => {
       this.trips = trips;
@@ -37,7 +37,12 @@ export class AdminTripsComponent implements OnInit {
 
   delete(trip: Trip) {
     this.tripService.deleteProduct(trip).subscribe(
-      response => this.getTrips(),
+      response => {
+        this.getTrips();
+      },
+      err => {
+        console.log(err);
+      }
     )
   }
 
@@ -48,7 +53,6 @@ export class AdminTripsComponent implements OnInit {
     dialogConfig.autoFocus = false;
     dialogConfig.data = trip
 
-
     const dialogRef = this.dialog.open(AddTripComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(data => {
@@ -56,8 +60,9 @@ export class AdminTripsComponent implements OnInit {
         data._id = trip._id
         this.tripService.editProduct(data).subscribe(
           data => {
-            let filenames = this.fileUpload.upload(trip._id)
-            console.log(filenames)
+            if (data.photos.length > 0)
+              this.fileUpload.upload(trip._id)
+
             this.getTrips();
           },
           err => {
@@ -82,7 +87,6 @@ export class AdminTripsComponent implements OnInit {
         this.tripService.addProduct(data).subscribe(
           data => {
             let filenames = this.fileUpload.upload(data._id)
-            console.log(filenames)
 
             this.getTrips();
             // this.toastr.success('Successfully added a trip!', 'Success!')

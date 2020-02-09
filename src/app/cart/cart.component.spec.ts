@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CartComponent } from './cart.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { Overlay, OverlayModule } from '@angular/cdk/overlay';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CartComponent', () => {
   let component: CartComponent;
@@ -8,7 +14,14 @@ describe('CartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CartComponent ]
+      declarations: [ CartComponent ],
+      imports: [
+        HttpClientModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireAuthModule,
+        OverlayModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));

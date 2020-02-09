@@ -4,5 +4,5 @@ export interface Order {
     user_id: string
     count: number
     totalPrice: number,
-    date: Date
+    date: string
 }

@@ -19,7 +19,7 @@ export class TripService {
     return this.httpClient.get<Trip[]>(this.apiUrl);
   }
 
-  getProduct(_id: number) {
+  getProduct(_id: string) {
     return this.httpClient.get<Trip>(`${this.apiUrl}/${_id}`);
   }
 

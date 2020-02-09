@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, from } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
 import { UserService } from './user.service';
@@ -31,6 +31,9 @@ export class AuthService {
   }
 
   getCurrentUser(): Promise<AppUser> {
+    if (!this.user) {
+      return Promise.resolve(null)
+    }
     if (!this.appUser) {
       return this.userService.getUserByEmail(this.user.email).toPromise()
     }
@@ -47,11 +50,11 @@ export class AuthService {
   }
 
   login({ email, password }: Credentials) {
-    return this.fireAuth.auth.signInWithEmailAndPassword(email, password)
+    return from(this.fireAuth.auth.signInWithEmailAndPassword(email, password))
   }
 
   register({ email, password }: Credentials) {
-    return this.fireAuth.auth.createUserWithEmailAndPassword(email, password);
+    return from(this.fireAuth.auth.createUserWithEmailAndPassword(email, password));
   }
 
   logout() {

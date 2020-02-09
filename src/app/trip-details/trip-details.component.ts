@@ -28,7 +28,7 @@ export class TripDetailsComponent implements OnInit {
   comments: Comment[] = []
   user: AppUser;
 
-  photos: String[]
+  photos: String[] = []
 
   hasOrdered: boolean = false;
 
@@ -53,36 +53,41 @@ export class TripDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       params => {
-        this.getTripData(params);
-        this.getUserOrderStatus();
+        if (params["id"]) {
+          this.getTripData(params["id"]);
+          this.getUserOrderStatus();
+        }
       }
     )
   }
 
-  private getUserOrderStatus() {
+  getUserOrderStatus() {
     this.authService.getCurrentUser().then(user => {
       this.user = user;
       this.orderService.getUserOrders(user._id).subscribe(orders => this.hasOrdered = orders.some(order => order.trip_id = this.trip._id))
-    }
-    )
+    })
   }
 
-  private getTripData(params) {
-    this.spinner.show();
-    this.tripService.getProduct(params["id"]).subscribe(trip => {
-      console.log(trip);
-      this.trip = trip;
-      this.photos = trip.photos.map(photo => `${environment.backendUrl}/${photo}`)
-      this.spinner.hide();
-      this.getComments(trip);
+  getTripData(id: string) {
+    this.tripService.getProduct(id).subscribe(trip => {
+      if (trip) {
+        console.log(trip);
+        this.trip = trip;
+        
+        if(trip.photos)
+          this.photos = trip.photos.map(photo => `${environment.backendUrl}/${photo}`)
+
+        this.spinner.hide();
+        this.getComments(trip);
+      }
     }, error => console.log(error));
   }
 
-  private getComments(trip: Trip) {
+  getComments(trip: Trip) {
     this.spinner.show();
     this.commentService.getCommentsByTrip(trip._id).subscribe(comments => {
       this.comments = comments;
-      console.log(this.comments);
+      // console.log(this.comments);
       this.spinner.hide();
     });
   }
@@ -116,7 +121,7 @@ export class TripDetailsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(data => {
       if (data != undefined && data != "") {
-        console.log(data)
+        // console.log(data)
         this.commentService.addComment(data, this.trip).subscribe(
           data => {
             this.getComments(this.trip)
@@ -127,5 +132,4 @@ export class TripDetailsComponent implements OnInit {
       }
     })
   }
-
 }

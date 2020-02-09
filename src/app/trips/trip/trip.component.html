@@ -21,22 +21,22 @@
     <!-- <div class="card-text">{{tripData.description}}</div> -->
     <div class="mt-2 mb-2 d-flex flex-row align-items-center justify-content-sm-between">
       <h5>Rating: </h5>
-      <star-rating [value]="tripData.rating" checkedcolor="orange" uncheckedcolor="black" size="22px" readonly="true"
+      <star-rating [value]="tripData?.rating" checkedcolor="orange" uncheckedcolor="black" size="22px" readonly="true"
         (rate)="onRate($event)"></star-rating>
     </div>
     <div class="d-flex flex-row justify-content-sm-between">
       <div class="row ml-1">
-        <h4 class="text-danger" *ngIf="tripData.seatsLeft == 0 && tripData.cartCount == 0">Sold out!</h4>
-        <button [ngStyle]="{'visibility': tripData.seatsLeft > 0 ? 'visible' : 'hidden' }" class="btn btn-dark"
+        <h4 class="text-danger" *ngIf="tripData?.seatsLeft == 0 && tripData?.cartCount == 0">Sold out!</h4>
+        <button [ngStyle]="{'visibility': tripData?.seatsLeft > 0 ? 'visible' : 'hidden' }" class="btn btn-dark"
           (click)="book()">+</button>
-        <button [ngStyle]="{'visibility': (tripData.cartCount > 0) ? 'visible' : 'hidden' }" class=" btn
+        <button [ngStyle]="{'visibility': (tripData?.cartCount > 0) ? 'visible' : 'hidden' }" class=" btn
             btn-dark" (click)="unbook()">-</button>
       </div>
       <div>
-        <h4 *ngIf="tripData.seatsLeft > 3" class="text-success">{{tripData?.seatsLeft}}</h4>
-        <h4 *ngIf="tripData.seatsLeft <= 3 && tripData.seatsLeft > 0" class="text-warning">{{tripData?.seatsLeft}}
+        <h4 *ngIf="tripData?.seatsLeft > 3" class="text-success">{{tripData?.seatsLeft}}</h4>
+        <h4 *ngIf="tripData?.seatsLeft <= 3 && tripData?.seatsLeft > 0" class="text-warning">{{tripData?.seatsLeft}}
         </h4>
-        <h4 *ngIf="tripData.seatsLeft == 0" class="text-danger">{{tripData?.seatsLeft}}</h4>
+        <h4 *ngIf="tripData?.seatsLeft == 0" class="text-danger">{{tripData?.seatsLeft}}</h4>
       </div>
     </div>
     <!-- <div class="mt-2 d-flex flex-row justify-content-center">

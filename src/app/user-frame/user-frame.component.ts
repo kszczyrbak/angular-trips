@@ -20,6 +20,7 @@ export class UserFrameComponent implements OnInit {
   fontSize: string;
   stringSize: string;
   initials: string;
+  
   constructor() {
   }
 
