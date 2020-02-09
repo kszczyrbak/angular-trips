@@ -1,9 +1,8 @@
-import { Trip } from "../models/trip.model"
+import { Trip } from 'src/app/models/trip.model'
+import { Comment } from 'src/app/models/comment.model'
+import { AppUser, SecurityRole } from 'src/app/models/user.model'
 
-import { AppUser, SecurityRole } from "../models/user.model"
-
-import { Comment } from '../models/comment.model';
-import { Order } from '../models/order.model';
+import { Order } from 'src/app/models/order.model'
 
 export let correctTrip: Trip = { _id: "1", name: 'Trip 1', country: 'Turcja', rating: 0, startDate: Date(), endDate: Date(), price: 210, maxSeats: 18, seatsLeft: 18, description: "Lorem ipsum", photos: [] }
 export let incorrectTrip: Trip = { _id: "0", name: 'Trip 1', country: 'Turcja', rating: -5, startDate: Date(), endDate: Date(), price: -5, maxSeats: 18, seatsLeft: 18, description: "Lorem ipsum", photos: [] }

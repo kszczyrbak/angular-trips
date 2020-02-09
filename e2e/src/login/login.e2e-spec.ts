@@ -45,19 +45,21 @@ describe('login page', () => {
     })
 
     it('should allow me to move to register page', () => {
-        page.getRegisterBtn().click();
-        browser.getCurrentUrl().then(
-            url => expect(url).toContain("register")
+        page.getRegisterBtn().click().then(
+            _ => browser.getCurrentUrl().then(
+                url => expect(url).toContain("register")
+            )
         )
     })
 
     it('should route me to app after successful login', () => {
-        page.getEmailForm().sendKeys('test20@mail.com')
-        page.getPasswordForm().sendKeys('Ezkatka6')
+        page.getEmailForm().sendKeys('admintest@mail.com')
+        page.getPasswordForm().sendKeys('ADMIN@)!(')
         page.getLoginBtn().click()
         browser.getCurrentUrl().then(
             url => expect(url).toContain("app")
         )
+
     })
 
     afterEach(async () => {

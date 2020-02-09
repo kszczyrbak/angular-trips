@@ -8,10 +8,10 @@ import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CartComponent } from '../cart/cart.component';
 import { AppUser, SecurityRole } from '../models/user.model';
-import { correctCartProducts, testUser, incorrectCartProducts } from './test-data';
 import { OrderServiceMock } from './order-service.mock';
 import { OrderService } from '../services/order.service';
 import { Trip } from '../models/trip.model';
+import { testUser, correctCartProducts, incorrectCartProducts } from 'src/assets/test-data';
 
 function productsToOrders(products: Trip[]) {
     return products.map(function (prod) {
@@ -25,7 +25,7 @@ function productsToOrders(products: Trip[]) {
     })
 }
 
-describe('CartComponent', () => {
+describe('IntegrationCart', () => {
     let component: CartComponent;
     let fixture: ComponentFixture<CartComponent>;
     let orderService: OrderServiceMock

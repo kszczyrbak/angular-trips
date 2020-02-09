@@ -23,7 +23,6 @@ import { RouterTestingModule } from '@angular/router/testing';
         HttpClientModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireAuthModule,
-        RouterTestingModule
     ],
     entryComponents: [
         AddCommentComponent,

@@ -10,9 +10,9 @@ import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderServiceMock } from './order-service.mock';
-import { testUser, correctOrder } from './test-data';
+import { testUser, correctOrder } from 'src/assets/test-data';
 
-describe('OrderHistoryIntegration', () => {
+describe('IntegrationOrderHistory', () => {
     let component: HistoryComponent;
     let orderService: OrderServiceMock;
     let fixture: ComponentFixture<HistoryComponent>;

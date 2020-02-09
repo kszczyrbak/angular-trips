@@ -13,11 +13,11 @@ import { SpinnerOverlayService } from '../spinner/spinner-overlay.service';
 import { SpinnerMock } from './spinner.mock';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
-import { correctRegisterFormData, incorrectRegisterFormData, testUser } from './test-data';
 import { SecurityRole } from '../models/user.model';
 import { environment } from 'src/environments/environment.test';
+import { correctRegisterFormData, incorrectRegisterFormData } from 'src/assets/test-data';
 
-describe('RegisterIntegration', () => {
+describe('IntegrationRegister', () => {
     let component: RegisterComponent;
     let fixture: ComponentFixture<RegisterComponent>;
     let authService: AuthServiceMock

@@ -42,7 +42,9 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { FileUploadService } from './services/file-upload.service';
-
+import { SpinnerTestModule } from './spinner/spinner.test.module';
+import { AddTripTestModule } from './add-trip/add-trip.test.module';
+import { AddCommentTestModule } from './add-comment/add-comment.test.module';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,6 @@ import { FileUploadService } from './services/file-upload.service';
     TripsComponent,
     CurrencyPipe,
     TripComponent,
-    AddTripComponent,
     NavbarComponent,
     CartComponent,
     TripDetailsComponent,
@@ -60,13 +61,10 @@ import { FileUploadService } from './services/file-upload.service';
     RegisterComponent,
     HomeComponent,
     AdminComponent,
-    SpinnerComponent,
-    SpinnerOverlayComponent,
     AdminTripsComponent,
     AdminUsersComponent,
     UserDetailsComponent,
     UserFrameComponent,
-    AddCommentComponent,
     HistoryComponent,
     AdminOrdersComponent,
     TimeAgoPipe,
@@ -88,10 +86,12 @@ import { FileUploadService } from './services/file-upload.service';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SpinnerTestModule,
+    AddTripTestModule,
+    AddCommentTestModule
   ],
   providers: [FiredbService, AuthService, FileUploadService],
-  bootstrap: [AppComponent],
-  entryComponents: [AddTripComponent, SpinnerOverlayComponent, AddCommentComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

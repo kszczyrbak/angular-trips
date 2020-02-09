@@ -32,7 +32,7 @@ import { AddTripDialogMock } from './admin-trip.integration.spec';
 import { Comment } from '../models/comment.model';
 import { CommentServiceMock } from './comment-service.mock';
 import { AppUser, SecurityRole } from '../models/user.model';
-import { correctTrip, correctComment, testUser, incorrectComment } from './test-data';
+import { correctTrip, correctComment, testUser, incorrectComment } from 'src/assets/test-data';
 
 export class AddCommentDialogMock {
     commentFromForm: Comment
@@ -45,7 +45,7 @@ export class AddCommentDialogMock {
 };
 
 
-describe('TripDetailsIntegration', () => {
+describe('IntegrationTripDetails', () => {
     let component: TripDetailsComponent;
     let fixture: ComponentFixture<TripDetailsComponent>;
     let tripService: TripServiceMock

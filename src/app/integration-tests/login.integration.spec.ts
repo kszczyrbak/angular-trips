@@ -23,9 +23,9 @@ import { SpinnerOverlayService } from "../spinner/spinner-overlay.service";
 import { SpinnerMock } from "./spinner.mock";
 
 import { AuthService } from "../services/auth.service";
-import { correctLoginFormData, incorrectLoginFormData } from './test-data';
+import { correctLoginFormData, incorrectLoginFormData } from 'src/assets/test-data';
 
-describe('LoginIntegration', () => {
+describe('IntegrationLogin', () => {
     let component: LoginComponent;
     let fixture: ComponentFixture<LoginComponent>;
     let authService: AuthServiceMock

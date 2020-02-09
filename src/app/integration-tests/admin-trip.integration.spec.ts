@@ -13,7 +13,7 @@ import { Trip } from '../models/trip.model';
 import { SpinnerMock } from './spinner.mock';
 import { TripServiceMock } from './trip-service.mock';
 import { FileUploadService } from '../services/file-upload.service';
-import { incorrectTrip, correctTrip } from './test-data';
+import { incorrectTrip, correctTrip } from 'src/assets/test-data';
 
 export class AddTripDialogMock {
     tripFromForm: Trip
@@ -25,7 +25,7 @@ export class AddTripDialogMock {
     }
 };
 
-describe('AdminTripIntegration', () => {
+describe('IntegrationAdminTrips', () => {
     let component: AdminTripsComponent;
     let fixture: ComponentFixture<AdminTripsComponent>;
     let tripService: TripServiceMock
