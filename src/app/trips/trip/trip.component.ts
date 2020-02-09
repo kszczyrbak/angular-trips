@@ -19,7 +19,8 @@ export class TripComponent implements OnInit {
 
   ngOnInit() {
     if (this.tripData) {
-      this.mainPhotoUrl = `${environment.backendUrl}/${this.tripData.photos[0]}`
+      // this.mainPhotoUrl = `${environment.backendUrl}/${this.tripData.photos[0]}`
+      // this.mainPhotoUrl = "src\\assets\\placeholder.jpg"
       console.log(this.mainPhotoUrl)
     }
   }

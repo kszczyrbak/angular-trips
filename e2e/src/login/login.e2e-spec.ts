@@ -53,13 +53,10 @@ describe('login page', () => {
     })
 
     it('should route me to app after successful login', () => {
-        page.getEmailForm().sendKeys('admintest@mail.com')
-        page.getPasswordForm().sendKeys('ADMIN@)!(')
-        page.getLoginBtn().click()
+        page.loginCorrectly()
         browser.getCurrentUrl().then(
             url => expect(url).toContain("app")
         )
-
     })
 
     afterEach(async () => {

@@ -33,6 +33,12 @@ export class LoginPage {
         return element(by.className('alert'))
     }
 
+    loginCorrectly() {
+        this.getEmailForm().sendKeys('protractormail@mail.com')
+        this.getPasswordForm().sendKeys('protractor')
+        this.getLoginBtn().click()
+    }
+
 
 
 }

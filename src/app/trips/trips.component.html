@@ -15,7 +15,7 @@
       </div>
       <div class="col-lg-8">
         <div class="card-deck justify-content-center mt-4">
-          <app-trip class="m-2" [tripData]="product" [ngClass]="getBorderClass(product)"
+          <app-trip id="trips" class="m-2" [tripData]="product" [ngClass]="getBorderClass(product)"
             *ngFor="let product of products | filter:filterObj " (removeEvent)="removeProduct(product)">
           </app-trip>
         </div>

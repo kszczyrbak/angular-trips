@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let trip of trips" class="hoverable">
+        <tr id="trip-row" *ngFor="let trip of trips" class="hoverable">
           <td class="align-middle" scope="row">
             <a [routerLink]="['/app/trip', trip._id]">{{trip._id}}</a>
           </td>

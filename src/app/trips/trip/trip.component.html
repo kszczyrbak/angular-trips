@@ -1,28 +1,28 @@
-<div class="card" style="width: 18rem;">
+<div class="card" id="trip" style="width: 18rem;">
   <div class="card-header bg-light text-center">
-    <h6 class="card-title">{{tripData?.name | uppercase}}</h6>
-    <p class="card-title">{{tripData?.country | uppercase}} </p>
+    <h6 id="name" class="card-title">{{tripData?.name | uppercase}}</h6>
+    <p id="country" class="card-title">{{tripData?.country | uppercase}} </p>
   </div>
   <div class="row p-1">
     <div class="col-md-6 text-center">
-      <img *ngIf="mainPhotoUrl" [src]="mainPhotoUrl" class="card-img-top round border clickable"
+      <img id="toDetails" src="../../assets/placeholder.jpg" class="card-img-top round border clickable"
         [routerLink]="['/app/trip', tripData._id]" routerLinkActive="active" (error)="placeholder($event)">
     </div>
     <div class="col-md-6 d-flex flex-row">
       <div class="d-flex justify-content-start align-items-center">
-        <h3>{{tripData?.price}}zł</h3>
+        <h3 id="price">{{tripData?.price}}zł</h3>
       </div>
     </div>
   </div>
   <div class="card-body">
     <div class="d-flex flex-row justify-content-sm-between">
-      <h5>{{tripData?.startDate | date:'yyyy/MM/dd'}} - {{tripData?.endDate | date:'yyyy/MM/dd'}}</h5>
+      <h5 id="date">{{tripData?.startDate | date:'yyyy/MM/dd'}} - {{tripData?.endDate | date:'yyyy/MM/dd'}}</h5>
     </div>
     <!-- <div class="card-text">{{tripData.description}}</div> -->
     <div class="mt-2 mb-2 d-flex flex-row align-items-center justify-content-sm-between">
       <h5>Rating: </h5>
-      <star-rating [value]="tripData?.rating" checkedcolor="orange" uncheckedcolor="black" size="22px" readonly="true"
-        (rate)="onRate($event)"></star-rating>
+      <star-rating id="rating" [value]="tripData?.rating" checkedcolor="orange" uncheckedcolor="black" size="22px"
+        readonly="true" (rate)="onRate($event)"></star-rating>
     </div>
     <div class="d-flex flex-row justify-content-sm-between">
       <div class="row ml-1">
@@ -33,10 +33,11 @@
             btn-dark" (click)="unbook()">-</button>
       </div>
       <div>
-        <h4 *ngIf="tripData?.seatsLeft > 3" class="text-success">{{tripData?.seatsLeft}}</h4>
-        <h4 *ngIf="tripData?.seatsLeft <= 3 && tripData?.seatsLeft > 0" class="text-warning">{{tripData?.seatsLeft}}
+        <h4 id="seats" *ngIf="tripData?.seatsLeft > 3" class="text-success">{{tripData?.seatsLeft}}</h4>
+        <h4 id="seats" *ngIf="tripData?.seatsLeft <= 3 && tripData?.seatsLeft > 0" class="text-warning">
+          {{tripData?.seatsLeft}}
         </h4>
-        <h4 *ngIf="tripData?.seatsLeft == 0" class="text-danger">{{tripData?.seatsLeft}}</h4>
+        <h4 id="seats" *ngIf="tripData?.seatsLeft == 0" class="text-danger">{{tripData?.seatsLeft}}</h4>
       </div>
     </div>
     <!-- <div class="mt-2 d-flex flex-row justify-content-center">
