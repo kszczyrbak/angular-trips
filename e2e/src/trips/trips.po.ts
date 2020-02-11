@@ -13,11 +13,18 @@ export class TripsPage {
                 browser.sleep(1500)
             }
         )
+    }
 
+    getBookBtn() {
+        return element(by.id('bookBtn'))
     }
 
     getTitleText() {
         return element(by.css('app-root .content span')).getText() as Promise<string>;
+    }
+
+    getCartBtn() {
+        return element(by.id('cartBtn'))
     }
 
     getTitle() {

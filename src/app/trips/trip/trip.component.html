@@ -27,7 +27,7 @@
     <div class="d-flex flex-row justify-content-sm-between">
       <div class="row ml-1">
         <h4 class="text-danger" *ngIf="tripData?.seatsLeft == 0 && tripData?.cartCount == 0">Sold out!</h4>
-        <button [ngStyle]="{'visibility': tripData?.seatsLeft > 0 ? 'visible' : 'hidden' }" class="btn btn-dark"
+        <button id="bookBtn" [ngStyle]="{'visibility': tripData?.seatsLeft > 0 ? 'visible' : 'hidden' }" class="btn btn-dark"
           (click)="book()">+</button>
         <button [ngStyle]="{'visibility': (tripData?.cartCount > 0) ? 'visible' : 'hidden' }" class=" btn
             btn-dark" (click)="unbook()">-</button>

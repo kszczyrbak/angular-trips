@@ -20,6 +20,7 @@ exports.config = {
     register: './src/register/**/*.e2e-spec.ts',
     trip: './src/trip/**/*.e2e-spec.ts',
     trips: './src/trips/**/*.e2e-spec.ts',
+    cart: './src/cart/**/*.e2e-spec.ts'
   },
   capabilities: {
     browserName: 'chrome'

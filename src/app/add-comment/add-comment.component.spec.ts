@@ -8,6 +8,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AddCommentTestModule } from './add-comment.test.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AddCommentComponent', () => {
   let component: AddCommentComponent;
@@ -17,7 +18,8 @@ describe('AddCommentComponent', () => {
     TestBed.configureTestingModule({
       declarations: [],
       imports: [
-        AddCommentTestModule
+        AddCommentTestModule,
+        RouterTestingModule
       ]
     })
     .compileComponents();

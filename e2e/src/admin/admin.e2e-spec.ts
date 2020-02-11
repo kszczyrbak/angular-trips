@@ -29,40 +29,35 @@ describe('admin page', () => {
             count => noTrips = count
         )
 
-        browser.touchActions()
-            .tap(
-                page.getAddTripButton()
-            ).perform().then(
-                _ => page.addTrip().then(
-                    _ => {
-                        browser.sleep(1500)
-                        page.getAllTrips().count().then(
-                            newCount => expect(newCount).toBeGreaterThan(noTrips)
-                        )
-                    }
+        page.getAddTripButton().click().then(
+            _ => page.addTrip().then(
+                _ => {
+                    browser.sleep(1500)
+                    page.getAllTrips().count().then(
+                        newCount => expect(newCount).toBeGreaterThan(noTrips)
+                    )
+                }
 
-                )
             )
+        )
     })
 
-    // it('should delete a trip', () => {
-    //     let noTrips = 0
-    //     page.getAllTrips().count().then(
-    //         count => noTrips = count
-    //     )
+    it('should delete a trip', () => {
+        let noTrips = 0
+        page.getAllTrips().count().then(
+            count => noTrips = count
+        )
 
-    //     browser.touchActions()
-    //         .tap(page.getDeleteButton())
-    //         .perform().then(
-    //             _ => {
-    //                 browser.sleep(3000)
-    //                 page.getAllTrips().count().then(
-    //                     newCount => expect(newCount).toBeLessThan(noTrips)
-    //                 )
-    //             }
-    //         )
+        page.getDeleteButton().click().then(
+            _ => {
+                browser.sleep(3000)
+                page.getAllTrips().count().then(
+                    newCount => expect(newCount).toBeLessThan(noTrips)
+                )
+            }
+        )
 
-    // })
+    })
 
     afterEach(async () => {
         // Assert that there are no errors emitted from the browser

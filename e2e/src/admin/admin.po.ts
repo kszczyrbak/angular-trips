@@ -10,7 +10,7 @@ export class AdminPage {
         loginPage.navigateTo()
         loginPage.loginAsAdmin().then(
             _ => {
-                browser.sleep(1500)
+                browser.sleep(1000)
                 browser.get('/app/admin/trips')
                 browser.sleep(1500)
             }
