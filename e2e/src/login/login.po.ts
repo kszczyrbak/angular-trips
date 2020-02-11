@@ -2,7 +2,7 @@ import { browser, by, element } from 'protractor';
 
 export class LoginPage {
     navigateTo() {
-        return browser.get('/login');
+        browser.get('/login');
     }
 
     getTitle() {
@@ -33,10 +33,16 @@ export class LoginPage {
         return element(by.className('alert'))
     }
 
-    loginCorrectly() {
+    loginAsUser() {
         this.getEmailForm().sendKeys('protractormail@mail.com')
         this.getPasswordForm().sendKeys('protractor')
-        this.getLoginBtn().click()
+        return this.getLoginBtn().click()
+    }
+
+    loginAsAdmin() {
+        this.getEmailForm().sendKeys('test20@mail.com')
+        this.getPasswordForm().sendKeys('Ezkatka6')
+        return this.getLoginBtn().click()
     }
 
 

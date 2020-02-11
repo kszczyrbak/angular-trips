@@ -53,10 +53,15 @@ describe('login page', () => {
     })
 
     it('should route me to app after successful login', () => {
-        page.loginCorrectly()
-        browser.getCurrentUrl().then(
-            url => expect(url).toContain("app")
+        page.loginAsAdmin().then(
+            _ => {
+                browser.sleep(1500)
+                browser.getCurrentUrl().then(
+                    url => expect(url).toContain("app")
+                )
+            }
         )
+
     })
 
     afterEach(async () => {

@@ -34,13 +34,11 @@ describe('trips page', () => {
     })
 
     it("should move to trip details when clicking on a trip", () => {
-        browser.touchActions()
-            .tap(page.getDetailLink())
-            .perform().then(
-                _ => browser.getCurrentUrl().then(
-                    url => expect(url).toContain('trip/')
-                )
+        page.getDetailLink().click().then(
+            _ => browser.getCurrentUrl().then(
+                url => expect(url).toContain('trip/')
             )
+        )
     })
 
     afterEach(async () => {

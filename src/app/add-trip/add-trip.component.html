@@ -5,7 +5,7 @@
     <div class="col-sm">
       <div class="form-group">
         <label>Trip name</label>
-        <input type="text" class="form-control" formControlName="name" />
+        <input id="nameForm" type="text" class="form-control" formControlName="name" />
         <div *ngIf="name.invalid && name.touched" class="alert alert-danger">
           <div class="small" *ngIf="name.errors.required">
             Name is required
@@ -19,7 +19,7 @@
     <div class="col-sm">
       <div class="form-group">
         <label>Country</label>
-        <input type="text" class="form-control" formControlName="country" />
+        <input id="countryForm" type="text" class="form-control" formControlName="country" />
       </div>
     </div>
   </div>
@@ -28,13 +28,13 @@
     <div class="col-sm">
       <div class="form-group">
         <label>Start date</label>
-        <input type="date" class="form-control" formControlName="startDate" [min]="currentDate" />
+        <input id="startDateForm" type="date" class="form-control" formControlName="startDate" [min]="currentDate" />
       </div>
     </div>
     <div class="col-sm">
       <div class="form-group">
         <label>End date</label>
-        <input type="date" class="form-control" formControlName="endDate" [min]="currentDate" />
+        <input id="endDateForm" type="date" class="form-control" formControlName="endDate" [min]="currentDate" />
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
     <div class="col-sm">
       <div class="form-group">
         <label>Price</label>
-        <input type="number" class="form-control" formControlName="price" />
+        <input id="priceForm" type="number" class="form-control" formControlName="price" />
         <div *ngIf="price.invalid && price.touched" class="alert alert-danger">
           <div class="small" *ngIf="price.errors.required">
             Price is required.
@@ -57,7 +57,7 @@
     <div class="col-sm">
       <div class="form-group">
         <label>Number of seats</label>
-        <input type="number" class="form-control" formControlName="maxSeats" />
+        <input id="maxSeatsForm" type="number" class="form-control" formControlName="maxSeats" />
         <div *ngIf="maxSeats.invalid && maxSeats.touched" class="alert alert-danger">
           <div class="small" *ngIf="maxSeats.errors.required">
             Number of seats is required.
@@ -72,7 +72,7 @@
 
   <div class="form-group">
     <label>Description</label>
-    <textarea type="text" class="form-control" rows="5" formControlName="description"></textarea>
+    <textarea id="descriptionForm" type="text" class="form-control" rows="5" formControlName="description"></textarea>
   </div>
 
   <div class="wrapper">

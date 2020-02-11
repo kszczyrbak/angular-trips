@@ -6,9 +6,14 @@ export class TripsPage {
     navigateTo() {
         let loginPage = new LoginPage()
         loginPage.navigateTo()
-        loginPage.loginCorrectly()
-        browser.get("/app/trips")
-        browser.sleep(1000)
+        loginPage.loginAsAdmin().then(
+            _ => {
+                browser.sleep(1500)
+                browser.get("/app/trips")
+                browser.sleep(1500)
+            }
+        )
+
     }
 
     getTitleText() {

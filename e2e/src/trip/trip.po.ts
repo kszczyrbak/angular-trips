@@ -5,10 +5,11 @@ export class TripPage {
 
     navigateTo() {
         let tripsPage = new TripsPage();
-        tripsPage.navigateTo();
-        browser.touchActions()
-            .tap(tripsPage.getDetailLink())
-            .perform()
+        tripsPage.navigateTo()
+        tripsPage.getDetailLink().click().then(
+            _ => browser.sleep(1000)
+        )
+
     }
 
     getTitleText() {

@@ -11,6 +11,9 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminGuard } from './services/admin-guard';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { HistoryComponent } from './history/history.component';
+import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { AdminTripsComponent } from './admin/admin-trips/admin-trips.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -25,7 +28,12 @@ const routes: Routes = [
             { path: 'trip/:id', component: TripDetailsComponent },
             { path: 'user/:id', component: UserDetailsComponent },
             {
-                path: 'admin', component: AdminComponent, canActivate: [AdminGuard]
+                path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
+                    { path: '', redirectTo: '/app/admin/trips', pathMatch: 'full' },
+                    { path: 'trips', component: AdminTripsComponent },
+                    { path: 'users', component: AdminUsersComponent },
+                    { path: 'orders', component: AdminOrdersComponent },
+                ]
             }
         ]
     },

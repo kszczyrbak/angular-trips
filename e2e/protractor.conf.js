@@ -14,6 +14,13 @@ exports.config = {
   specs: [
     './src/**/*.e2e-spec.ts'
   ],
+  suites: {
+    login: './src/login/**/*.e2e-spec.ts',
+    admin: './src/admin/**/*.e2e-spec.ts',
+    register: './src/register/**/*.e2e-spec.ts',
+    trip: './src/trip/**/*.e2e-spec.ts',
+    trips: './src/trips/**/*.e2e-spec.ts',
+  },
   capabilities: {
     browserName: 'chrome'
   },

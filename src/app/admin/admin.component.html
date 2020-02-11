@@ -1,17 +1,18 @@
-<ngb-tabset justify="center">
-  <ngb-tab id="trips-tab" title="Trips">
-    <ng-template ngbTabContent>
-      <app-admin-trips></app-admin-trips>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab id="user-tab" title="Users">
-    <ng-template ngbTabContent>
-      <app-admin-users></app-admin-users>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab title="Orders">
-    <ng-template ngbTabContent>
-      <app-admin-orders></app-admin-orders>
-    </ng-template>
-  </ngb-tab>
-</ngb-tabset>
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" id="trips-tab" routerLink="trips">Trips</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="users-tab" routerLink="users">Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="orders-tab" routerLink="orders">Orders</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<router-outlet>
+</router-outlet>
