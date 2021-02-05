@@ -60,7 +60,6 @@ import { AddCommentTestModule } from './add-comment/add-comment.test.module';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    AddTripComponent,
     AdminComponent,
     AdminTripsComponent,
     AdminUsersComponent,

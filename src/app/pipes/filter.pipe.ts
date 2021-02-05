@@ -17,13 +17,11 @@ export class FilterPipe implements PipeTransform {
 
   filterSeats(product: Trip, filters: any) {
     let val = (filters['seatsLeft'] != null ? (product.seatsLeft > filters['seatsLeft']) : true);
-    console.log(val)
     return val;
   }
 
   filterPrice(product: Trip, filters: any) {
     let val = (filters['priceMin'] != null ? (product.price > filters['priceMin']) : true) && (filters['priceMax'] != null ? (product.price < filters['priceMax']) : true);
-    console.log(val)
     return val;
   }
 

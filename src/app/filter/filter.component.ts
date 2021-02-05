@@ -20,7 +20,6 @@ export class FilterComponent implements OnInit {
   getStringFromDate(date: Date, format: string) {
     let pipe = new DatePipe('en-US')
     let stringDate = pipe.transform(date, format);
-    console.log(stringDate)
     return stringDate
   }
 
@@ -54,7 +53,6 @@ export class FilterComponent implements OnInit {
         Object.keys(filterObj).forEach(key =>
           filterObj[key] === '' || filterObj[key] === null ? delete filterObj[key] : key
         );
-        console.log(filterObj)
         this.filterChange.emit(filterObj);
       }
     )

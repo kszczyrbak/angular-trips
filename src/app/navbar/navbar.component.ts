@@ -24,8 +24,7 @@ export class NavbarComponent implements OnInit {
     )
     this.authService.getCurrentUser().then(
       user => {
-        if(user){
-          console.log(user)
+        if (user) {
           this.currentUser = user;
           this.isAdmin = (this.currentUser.role == SecurityRole.ADMIN)
         }
@@ -36,7 +35,6 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.authService.logout().then(
       (message) => {
-        console.log(message);
         this.router.navigateByUrl('login')
       }
     )

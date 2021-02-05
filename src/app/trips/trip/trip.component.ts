@@ -13,24 +13,24 @@ export class TripComponent implements OnInit {
   @Input() tripData: Trip
   @Output() removeEvent = new EventEmitter<Trip>()
 
-  mainPhotoUrl: string;
+  photo: string;
 
   constructor(private cartService: CartService) { }
 
+  // TODO: resolver
+
   ngOnInit() {
     if (this.tripData) {
-      // this.mainPhotoUrl = `${environment.backendUrl}/${this.tripData.photos[0]}`
-      // this.mainPhotoUrl = "src\\assets\\placeholder.jpg"
-      console.log(this.mainPhotoUrl)
+      this.photo = this.tripData.photos.length > 0 ? this.tripData.photos[0] : this.getPlaceholderUrl()
     }
-  }
-
-  placeholder($event) {
-    this.mainPhotoUrl = "assets/placeholder.jpg"
   }
 
   removeProduct() {
     this.removeEvent.emit(this.tripData)
+  }
+
+  getPlaceholderUrl() {
+    return "../../../assets/placeholder.jpg"
   }
 
 

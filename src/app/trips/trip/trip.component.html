@@ -5,7 +5,7 @@
   </div>
   <div class="row p-1">
     <div class="col-md-6 text-center">
-      <img id="toDetails" src="../../assets/placeholder.jpg" class="card-img-top round border clickable"
+      <img id="toDetails" [src]="photo" class="card-img-top round border clickable"
         [routerLink]="['/app/trip', tripData._id]" routerLinkActive="active" (error)="placeholder($event)">
     </div>
     <div class="col-md-6 d-flex flex-row">

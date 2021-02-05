@@ -97,7 +97,11 @@
         <tbody class="upload-name-style">
           <tr *ngFor="let item of files">
             <td>
-              <div class="d-flex flex-row justify-content-sm-between align-items-center">{{ item?.relativePath }}
+              <div class="d-flex flex-row justify-content-sm-between align-items-center">
+                <div class="d-inline-block text-truncate" style="max-width: 30vh;">
+                  {{ item?.relativePath }}
+
+                </div>
                 <button class="btn btn-danger btn-sm" (click)="remove(item)">X</button>
               </div>
             </td>
